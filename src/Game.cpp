@@ -140,6 +140,8 @@ void Game::Run() {
         //printf("3\n");
         stateStack.top()->Render();
         //printf("4\n");
+
+
         SDL_RenderPresent(renderer);
         //printf("5\n");
         SDL_Delay(33);

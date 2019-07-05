@@ -1,11 +1,13 @@
 #include "CameraFollower.h"
 #include "Camera.h"
 
-CameraFollower::CameraFollower(GameObject& go) : Component(go) {
+CameraFollower::CameraFollower(GameObject& go, int x, int y) : Component(go) {
+    xTela = x;
+    yTela = y;
 }
 
 void CameraFollower::Update(float dt) {
-    associated.box.pos =  Camera::pos;
+    associated.box.pos =  Camera::pos + Vec2(xTela, yTela);
 }
 
 void CameraFollower::Render() {
