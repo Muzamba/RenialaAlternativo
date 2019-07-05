@@ -11,6 +11,8 @@
 #include "Talisma.h"
 #include "Game.h"
 #include "CameraFollower.h"
+#include "HUD.h"
+
 
 TestState::TestState() : State() {
 
@@ -23,6 +25,12 @@ void TestState::LoadAssets() {
 	gobg->AddComponent(new CameraFollower(*gobg));
 	gobg->box.pos = {0,0};
 	AddObject(gobg);
+
+
+	GameObject* goHUD = new GameObject();
+	HUD* hud = new HUD(*goHUD);
+	AddObject(goHUD);
+
 
 	LoadPlataformas();
 	
@@ -180,9 +188,9 @@ void TestState::LoadPlataformas() {
 
 	/*talisma*/
 	GameObject* talismaObject = new GameObject();
-	Talisma *talisma1 = new Talisma(*talismaObject, "assets/img/penguin.png", "assets/text/talisma1.txt");
-	talismaObject->box.pos.x = plat22Obj->box.pos.x + 220;
-	talismaObject->box.pos.y = plat22Obj->box.pos.y - 60;
+	Talisma *talisma1 = new Talisma(*talismaObject, "assets/img/planta.png", "assets/text/talisma1.txt",2);
+	talismaObject->box.pos.x = 200;//plat22Obj->box.pos.x + 220;
+	talismaObject->box.pos.y = 400;//plat22Obj->box.pos.y - 60;
 	//GameData::talismaArray.emplace_back(talisma1);
 	//talismaObject->AddComponent(talisma1);
 	AddObject(talismaObject);

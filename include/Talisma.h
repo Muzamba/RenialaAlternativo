@@ -10,7 +10,7 @@
 class Talisma : public Component {
 public:
     //passar os itens como parametro
-    Talisma(GameObject& associated, std::string imgfile, std::string textfile);
+    Talisma(GameObject& associated, std::string imgfile, std::string textfile, int indice = 0);
     ~Talisma();
     void Update(float dt) override;
 	void Render() override;
@@ -27,6 +27,7 @@ private:
     void ReadText(std::string textfile);
     Rect rangeText;
     bool exibeTexto;
+    int indice;
 };
 
 #endif
