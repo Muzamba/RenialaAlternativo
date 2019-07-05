@@ -4,6 +4,7 @@
 #include "Collider.h"
 #include "Gravidade.h"
 #include "Physic.h"
+#include "Game.h"
 
 
 Player::Player(GameObject& associated) : Component(associated), atual(nullptr), grounded(false), jumps(0) {
@@ -33,7 +34,7 @@ Player::Player(GameObject& associated) : Component(associated), atual(nullptr), 
 }
 
 Player::~Player() {
-
+	
 }
 
 void Player::Update(float dt) {

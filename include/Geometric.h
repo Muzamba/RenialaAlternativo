@@ -66,5 +66,7 @@ public:
 float RadToDegrees(float rad);
 float DegreesToRad(float degrees);
 
+int verificaRange(Vec2 conjunto1, Vec2 conjunto2);
+
 
 #endif

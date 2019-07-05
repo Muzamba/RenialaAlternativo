@@ -11,6 +11,7 @@ class Talisma : public Component {
 public:
     //passar os itens como parametro
     Talisma(GameObject& associated, std::string imgfile, std::string textfile);
+    ~Talisma();
     void Update(float dt) override;
 	void Render() override;
 	bool Is(std::string type) override;

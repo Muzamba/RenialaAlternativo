@@ -12,7 +12,7 @@ Gravidade::~Gravidade() {
 }
 
 void Gravidade::Update(float dt) {
-	if(timer.Get() < 5.0f){
+	if(timer.Get() < 1.0f){
 		timer.Update(dt);
 	}else {
 		auto physic = (Physic*)associated.GetComponent("Physic");

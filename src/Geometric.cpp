@@ -186,3 +186,24 @@ float RadToDegrees(float rad) {
 float DegreesToRad(float degrees) {
     return degrees * (PI / 180);
 }
+
+// Formatodo vec2 = {min,max};
+int verificaRange(Vec2 conjunto1, Vec2 conjunto2) {
+    if(conjunto1.x < conjunto2.x) {
+        if(conjunto1.y < conjunto2.x) {
+            return 0;
+        } else if(conjunto1.y > conjunto2.y) {
+            return floor(conjunto2.y - conjunto2.x);
+        } else {
+            return floor(conjunto1.y - conjunto2.x);
+        }
+    } else if(conjunto1.x < conjunto2.y) {
+        if(conjunto1.y < conjunto2.y) {
+            return floor(conjunto1.y - conjunto1.x);
+        } else {
+            return floor(conjunto2.y - conjunto1.x);
+        }
+    } else {
+        return 0;
+    }
+}

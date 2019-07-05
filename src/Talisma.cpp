@@ -12,11 +12,12 @@
 #include "BoxState.h"
 
 Talisma::Talisma(GameObject& associated, std::string imgfile, std::string textfile) :Component(associated) {
+    
     this->talismaFile = imgfile;
     talisma = new Sprite(associated, imgfile);
     texto = new GameObject();
     texto->AddComponent(new Text(*texto, "assets/font/herculanum.ttf", 15, Text::BLENDED, "precione (x) para coletar", {0,0,0,255}));
-    //texto->box.pos = associated.box.pos;
+    texto->box.pos = associated.box.pos;
     ReadText(textfile); 
     associated.box.size.x = talisma->GetWidth();
     associated.box.size.y = talisma->GetHeight();
@@ -28,6 +29,7 @@ Talisma::Talisma(GameObject& associated, std::string imgfile, std::string textfi
     rangeText.size.x = 500;
     rangeText.size.y = 500;
     exibeTexto = false;
+    
 }
 
 void Talisma::Update(float dt) {
@@ -88,4 +90,9 @@ void Talisma::ReadText(std::string textfile) {
 
     strStream << fin.rdbuf();
     text = strStream.str();
+}
+
+Talisma::~Talisma() {
+    delete talisma;
+    delete texto;
 }

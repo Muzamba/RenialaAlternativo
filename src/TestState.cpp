@@ -29,10 +29,11 @@ void TestState::LoadAssets() {
 	
 	//GameObject* goPlat = new GameObject();
 	//TileSet* tile = new TileSet(32, 32, "assets/img/chao2.png");
-	//PlataformaFixa* plat = new PlataformaFixa(*goPlat,tile, "assets/map/plat1.txt");
+	//PlataformaFixa* plat = new PlataformaFixa(*goPlat,tile, "assets/map/test.txt");
 	//goPlat->AddComponent(plat);
 	//goPlat->AddComponent(new Physic(*goPlat,Physic::CHAO));
-	//goPlat->box.pos.y = 500;
+	//goPlat->box.pos.y = 400;
+	//goPlat->box.pos.x = 100;
 	//AddObject(goPlat);
 //
 	//GameObject* goPlat2 = new GameObject();
@@ -104,7 +105,7 @@ void TestState::LoadPlataformas() {
 
 	GameObject *plat8Obj = new GameObject();
 	plat8Obj->box.pos = {3740 - 50, 440 - 100};
-	PlataformaMovel *plat8 = new PlataformaMovel(*plat8Obj, plat_hor_2, "assets/map/plat3.txt", PlataformaMovel::HORIZONTAL, 100.0f, 0.5f);
+	PlataformaMovel *plat8 = new PlataformaMovel(*plat8Obj, plat_hor_2, "assets/map/plat3.txt", PlataformaMovel::HORIZONTAL, 100.0f, 0.2f);
 	AddObject(plat8Obj);
 
 	GameObject *plat9Obj = new GameObject();
@@ -114,12 +115,12 @@ void TestState::LoadPlataformas() {
 
 	GameObject *plat10Obj = new GameObject();
 	plat10Obj->box.pos = {4800 - 50, 480 - 100};
-	PlataformaMovel *plat10 = new PlataformaMovel(*plat10Obj, plat_hor_2, "assets/map/plat3.txt", PlataformaMovel::HORIZONTAL, 100.0f, 0.5f);
+	PlataformaMovel *plat10 = new PlataformaMovel(*plat10Obj, plat_hor_2, "assets/map/plat3.txt", PlataformaMovel::HORIZONTAL, 100.0f, 0.2f);
 	AddObject(plat10Obj);
 
 	GameObject *plat11Obj = new GameObject();
 	plat11Obj->box.pos = {5200 - 50, 550 - 100};
-	PlataformaMovel *plat11 = new PlataformaMovel(*plat11Obj, plat_hor_2, "assets/map/plat3.txt", PlataformaMovel::VERTICAL);
+	PlataformaMovel *plat11 = new PlataformaMovel(*plat11Obj, plat_hor_2, "assets/map/plat3.txt", PlataformaMovel::VERTICAL, 100.0f, 0.2f);
 	AddObject(plat11Obj);
 	
 	GameObject *plat12Obj = new GameObject();
@@ -134,7 +135,7 @@ void TestState::LoadPlataformas() {
 
 	GameObject *plat14Obj = new GameObject();
 	plat14Obj->box.pos = {6800 - 50, 480 - 100};
-	PlataformaMovel *plat14 = new PlataformaMovel(*plat14Obj, plat_hor_2, "assets/map/plat3.txt", PlataformaMovel::HORIZONTAL, 100.0f, 0.5f);
+	PlataformaMovel *plat14 = new PlataformaMovel(*plat14Obj, plat_hor_2, "assets/map/plat3.txt", PlataformaMovel::HORIZONTAL, 100.0f, 0.2f);
 	AddObject(plat14Obj);
 
 	GameObject *plat15Obj = new GameObject();
@@ -144,7 +145,7 @@ void TestState::LoadPlataformas() {
 
 	GameObject *plat16Obj = new GameObject();
 	plat16Obj->box.pos = { 7400 - 50, 480 - 100};
-	PlataformaMovel *plat16 = new PlataformaMovel(*plat16Obj, plat_hor_2, "assets/map/plat3.txt", PlataformaMovel::HORIZONTAL, 100.0f, 0.5f);
+	PlataformaMovel *plat16 = new PlataformaMovel(*plat16Obj, plat_hor_2, "assets/map/plat3.txt", PlataformaMovel::HORIZONTAL, 100.0f, 0.2f);
 	AddObject(plat16Obj);
 
 	//GameObject *plat17Obj = new GameObject();
@@ -178,13 +179,13 @@ void TestState::LoadPlataformas() {
 	AddObject(plat22Obj);
 
 	/*talisma*/
-	//GameObject* talismaObject = new GameObject();
-	//Talisma *talisma1 = new Talisma(*talismaObject, "assets/img/penguin.png", "assets/text/talisma1.txt");
-	//talismaObject->box.x = plat22Obj->box.x + 220;
-	//talismaObject->box.y = plat22Obj->box.y - 60;
+	GameObject* talismaObject = new GameObject();
+	Talisma *talisma1 = new Talisma(*talismaObject, "assets/img/penguin.png", "assets/text/talisma1.txt");
+	talismaObject->box.pos.x = plat22Obj->box.pos.x + 220;
+	talismaObject->box.pos.y = plat22Obj->box.pos.y - 60;
 	//GameData::talismaArray.emplace_back(talisma1);
 	//talismaObject->AddComponent(talisma1);
-	//objectArray.emplace_back(talismaObject);
+	AddObject(talismaObject);
 
 	GameObject *plat23Obj = new GameObject();
 	plat23Obj->box.pos = {9732 - 50, 550 - 100};
@@ -197,8 +198,8 @@ void TestState::LoadPlataformas() {
 	AddObject(plat24Obj);
 
 	GameObject *plat25Obj = new GameObject();
-	plat25Obj->box.pos = {10244 - 50, 550 - 100};
-	PlataformaMovel *plat25 = new PlataformaMovel(*plat25Obj, plat_ver_2, "assets/map/plat10.txt", PlataformaMovel::HORIZONTAL, 100.0f, 0.3f);
+	plat25Obj->box.pos = {10244 - 150, 550 - 100};
+	PlataformaMovel *plat25 = new PlataformaMovel(*plat25Obj, plat_ver_2, "assets/map/plat10.txt", PlataformaMovel::HORIZONTAL, 100.0f, 0.1f);
 	AddObject(plat25Obj);
 
 	GameObject *plat26Obj = new GameObject();
