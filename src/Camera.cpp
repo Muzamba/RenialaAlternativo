@@ -22,6 +22,8 @@ void Camera::Update(float dt) {
 
         if(auxX < 0) {
             auxX = 0;
+        } else if( auxX > 10300) {
+            auxX = 10300;
         }
         if(auxY > 0) {
             auxY = 0;

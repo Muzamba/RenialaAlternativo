@@ -162,4 +162,11 @@ void Sprite::SetFlip(bool flip) {
     this->flip = flip;
 }
 
+void Sprite::SetAlphaChannel(uint alpha) {
+
+    SDL_SetTextureBlendMode(texture.get(), SDL_BLENDMODE_BLEND);
+    SDL_SetTextureAlphaMod(texture.get(), alpha);
+    
+}
+
 
