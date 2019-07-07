@@ -42,6 +42,8 @@ public:
 
     void SetFlip(bool flip);
 
+    void SetAlphaChannel(uint alpha);
+
 
 
 private:

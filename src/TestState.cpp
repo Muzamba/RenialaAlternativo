@@ -12,7 +12,8 @@
 #include "Game.h"
 #include "CameraFollower.h"
 #include "HUD.h"
-
+#include "Fase2.h"
+#include "FadeOut.h"
 
 TestState::TestState() : State() {
 
@@ -63,10 +64,13 @@ void TestState::LoadAssets() {
 
 	GameObject* goplayer = new GameObject();
 	Player* player = new Player(*goplayer);
-	goplayer->box.pos.x = 300;
+	goplayer->box.pos.x = 11000;//300;
 	goplayer->box.pos.y = 300;
 	Camera::Fallow(goplayer);
 	Game::GetInstance().playerStatus.player = AddObject(goplayer);
+
+	
+
 
 }
 
@@ -216,9 +220,15 @@ void TestState::LoadPlataformas() {
 	AddObject(plat26Obj);
 
 	GameObject *plat27Obj = new GameObject();
-	PlataformaFixa *plat27 = new PlataformaFixa(*plat27Obj, chao2, "assets/map/plat2.txt");
+	PlataformaFixa *plat27 = new PlataformaFixa(*plat27Obj, chao2, "assets/map/plat27.txt");
 	plat27Obj->box.pos = {10628 - 50, 600 - 100};
 	AddObject(plat27Obj);
+
+	GameObject *platTransObj = new GameObject();
+	TileSet* tileCaverna = new TileSet(32, 32, "assets/img/chao3.png");
+	PlataformaFixa *platTras = new PlataformaFixa(*platTransObj,tileCaverna,"assets/map/platTras1.txt");
+	platTransObj->box.pos = {11058, 500};
+	AddObject(platTransObj);
 
 
 }
@@ -226,6 +236,21 @@ void TestState::LoadPlataformas() {
 void TestState::Update(float dt) {
 	Camera::Update(dt);
 	UpdateArray(dt);
+	if(Game::GetInstance().playerStatus.player.lock()->box.pos.x > 11100) {
+		static GameObject* fadeOutObj = new GameObject();
+		static FadeOut* fadeOut = new FadeOut(*fadeOutObj, 1.0f);
+		static bool firstRun = true;
+		if(firstRun){
+			fadeOutObj->AddComponent(fadeOut);
+			fadeOut->Begin();
+			AddObject(fadeOutObj);
+			firstRun = false;
+		}
+		if(fadeOut->timer.Get() > 1.0f) {
+			popRequested = true;
+			Game::GetInstance().Push(new Fase2());
+		}
+	}
 	if (InputManager::GetInstance().KeyPress(ESCAPE_KEY) || InputManager::GetInstance().QuitRequested()) {
 		quitRequested = true;
 	}
