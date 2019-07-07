@@ -1,10 +1,10 @@
 #include "Game.h"
 #include "InputManager.h"
-#include "TestState.h"
+#include "MenuState.h"
 
 int main() {
     auto& game = Game::GetInstance();
-    game.Push(new TestState());
+    game.Push(new MenuState());
 
     game.Run();
 
