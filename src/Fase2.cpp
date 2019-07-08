@@ -13,6 +13,7 @@
 #include "CameraFollower.h"
 #include "HUD.h"
 #include "FadeIn.h"
+#include "Wisp.h"
 
 Fase2::Fase2() : State() {
 
@@ -41,8 +42,15 @@ void Fase2::LoadAssets() {
 	goplayer->box.pos.x = -200;//300;
 	goplayer->box.pos.y = -1372 + 32 * 20;//300;
 	Camera::Fallow(goplayer);
-	Game::GetInstance().playerStatus.player = AddObject(goplayer);
+    auto p = AddObject(goplayer);
+	Game::GetInstance().playerStatus.player = p;
 
+    GameObject* goWisp = new GameObject();
+	Wisp* wisp = new Wisp(*goWisp, p);
+	AddObject(goWisp);
+
+    //GameObject* test = new GameObject();
+    //test->AddComponent(new Sprite(*test, "assets/img/BlackWithHole.png"));
 
     GameObject* fadeInObj = new GameObject();
     FadeIn* fadeIn = new FadeIn(*fadeInObj, 2.0f);
