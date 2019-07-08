@@ -7,11 +7,6 @@
 
 MenuState::MenuState() : State () {
     mostrarTexto = true;
-
-    texto = new GameObject();
-    Sprite *textoSprite = new Sprite(*texto, "assets/img/penguin.png");
-    texto->AddComponent(textoSprite);
-    texto->box.pos = {(1280/2.0f) - textoSprite->GetWidth()/2, (720/2.0f) + 100};
 }
 
 void MenuState::Update(float dt) {
@@ -20,7 +15,7 @@ void MenuState::Update(float dt) {
     if (InputManager::GetInstance().KeyPress(SDLK_SPACE)) {
         Game::GetInstance().Push(new TestState());
     }
-    if (textCounter.Get() > 0.8) {
+    if (textCounter.Get() > 1.2) {
         mostrarTexto = !mostrarTexto;
         textCounter.Restart();
     }
@@ -29,6 +24,7 @@ void MenuState::Update(float dt) {
 void MenuState::Render() {
     this->RenderArray();
     if(mostrarTexto) {
+        goTextbg->Render();
         texto->Render();
     }
 }
@@ -52,4 +48,15 @@ void MenuState::LoadAssets() {
 	gobg->AddComponent(new CameraFollower(*gobg));
 	gobg->box.pos = {0,0};
 	AddObject(gobg);
+
+    goTextbg = new GameObject();
+    Sprite *spriteBg = new Sprite(*goTextbg, "assets/img/barra_de_texto.png");
+    goTextbg->AddComponent(spriteBg);
+    Vec2 centro = {(1280/2.0f) - spriteBg->GetWidth()/2, (720/2.0f) + 100};
+    goTextbg->box.pos = centro;
+
+    texto = new GameObject();
+    Text *textoFonte = new Text(*texto, "assets/font/PixelFont.otf", 20, Text::BLENDED, "APERTE SPACE PARA JOGAR", {255,255,255,255});
+    texto->AddComponent(textoFonte);
+    texto->box.pos = {centro.x + (350/2), centro.y + 10};
 }

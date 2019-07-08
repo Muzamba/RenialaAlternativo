@@ -17,6 +17,7 @@ public:
 	void LoadAssets();
 private:
 	GameObject *texto;
+	GameObject *goTextbg;
 	bool mostrarTexto;
 	Timer textCounter;
 };
