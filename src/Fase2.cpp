@@ -24,24 +24,22 @@ Fase2::~Fase2() {
 
 void Fase2::LoadAssets() {
     GameObject* gobg = new GameObject();
-	Sprite* sprite = new Sprite(*gobg, "assets/img/cenario arvore inacabado4.png");
+	Sprite* sprite = new Sprite(*gobg, "assets/img/cenario2/fundo caverna.png");
+    sprite->SetCamMulti({0.0f,0.0f});
+	sprite->SetScale(3.742690f,3.75f);
 	gobg->AddComponent(sprite);
-	gobg->AddComponent(new CameraFollower(*gobg));
+    gobg->box.pos = {0.0f,0.0f};
 	AddObject(gobg);
 
-
-    GameObject* goHUD = new GameObject();
-	HUD* hud = new HUD(*goHUD);
-	AddObject(goHUD);
-
-
-
     LoadPlataformas();
+
+	AddObject(Game::GetInstance().playerStatus.hud.get());
+
 
     GameObject* goplayer = new GameObject();
 	Player* player = new Player(*goplayer);
 	goplayer->box.pos.x = -200;//300;
-	goplayer->box.pos.y = -10092;//300;
+	goplayer->box.pos.y = -1372 + 32 * 20;//300;
 	Camera::Fallow(goplayer);
 	Game::GetInstance().playerStatus.player = AddObject(goplayer);
 
@@ -61,9 +59,14 @@ void Fase2::LoadPlataformas() {
 
 
 	GameObject *plat1Obj = new GameObject();
-	PlataformaFixa *plat1 = new PlataformaFixa(*plat1Obj, chao2, "assets/map/plat1.txt");
-	plat1Obj->box.pos = {-200, -10000};
+	PlataformaFixa *plat1 = new PlataformaFixa(*plat1Obj, chao2, "assets/map/fase2/plat1.txt");
+	plat1Obj->box.pos = {-200, -1280 + 32 * 20};
 	AddObject(plat1Obj);
+
+    GameObject *plat2Obj = new GameObject();
+	PlataformaFixa *plat2 = new PlataformaFixa(*plat2Obj, chao2, "assets/map/fase2/plat2.txt");
+	plat2Obj->box.pos = {plat1Obj->box.pos.x + 32 * 23, plat1Obj->box.pos.y + 32 * 39};
+	AddObject(plat2Obj);
 }
 
 void Fase2::Update(float dt) {

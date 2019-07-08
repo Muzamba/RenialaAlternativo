@@ -10,18 +10,25 @@
 #include "InputManager.h"
 #include "CameraFollower.h"
 #include "BoxState.h"
+#include "HUD.h"
 
-Talisma::Talisma(GameObject& associated, std::string imgfile, std::string textfile, int indice) :Component(associated) {
+Talisma::Talisma(GameObject& associated, std::string textfile, std::string imgfileInGame, std::string imgfileNoAnim, std::string imgfileHUD, int indice) : Component(associated) {
     
-    this->talismaFile = imgfile;
-    talisma = new Sprite(associated, imgfile);
-    talisma->SetScale(2,2);
+    //this->talismaFile = imgfile;
+    spriTable["Animated"] = new Sprite(associated, imgfileInGame, 0, 0, 0.1f, 5);
+    spriTable["NotAnimated"] = new Sprite(associated, imgfileNoAnim);
+    spriTable["HUD"] = new Sprite(associated, imgfileHUD);
+    spriTable["Animated"]->SetScale(2,2);
+    spriTable["NotAnimated"]->SetScale(2,2);
+    spriTable["HUD"]->SetScale(2,2);
+
+    atual = spriTable["NotAnimated"];
     texto = new GameObject();
     texto->AddComponent(new Text(*texto, "assets/font/herculanum.ttf", 15, Text::BLENDED, "precione (x) para coletar", {0,0,0,255}));
     texto->box.pos = associated.box.pos;
     ReadText(textfile); 
-    associated.box.size.x = talisma->GetWidth();
-    associated.box.size.y = talisma->GetHeight();
+    associated.box.size.x = atual->GetWidth();
+    associated.box.size.y = atual->GetHeight();
     //associated.AddComponent(talisma);
     associated.AddComponent(this);
     coletado = false;
@@ -31,13 +38,32 @@ Talisma::Talisma(GameObject& associated, std::string imgfile, std::string textfi
     rangeText.size.y = 200;
     exibeTexto = false;
     this->indice = indice;
+    timer.Restart();
+    ligaBrilho = false;
     
 }
 
 void Talisma::Update(float dt) {
-    talisma->Update(dt);
+    timer.Update(dt);
+    atual->Update(dt);
     auto& im = InputManager::GetInstance();
     if(!coletado) {
+        //timer.Update(dt);
+        if(ligaBrilho){
+            if(timer.Get() > 0.6f) {
+                ligaBrilho = false;
+                timer.Restart(); 
+                atual = spriTable["NotAnimated"];
+            }
+        } else {
+            if(timer.Get() > 5.0f) {
+                ligaBrilho = true;
+                timer.Restart();
+                atual = spriTable["Animated"];
+                atual->SetFrame(0);
+            }
+        }
+
         texto->box.mudaCentro({associated.box.centro().x, associated.box.centro().y - associated.box.size.y/2 - texto->box.size.y});
         rangeText.pos.x = associated.box.pos.x - 100;
         rangeText.pos.y = associated.box.pos.y - 100;
@@ -51,8 +77,11 @@ void Talisma::Update(float dt) {
                     //coleta o item
                     coletado = true;
                     exibeTexto = false;
+                    atual = spriTable["HUD"];
+                    associated.box.size.x = atual->GetWidth();
+                    associated.box.size.y = atual->GetHeight();
                     associated.AddComponent(new CameraFollower(associated, 90 + 44 * indice, 25 ));
-                    Game::GetInstance().Push(new BoxState(talismaFile, text));
+                    //Game::GetInstance().Push(new BoxState(talismaFile, text));
                 }
             } else {
                 exibeTexto = false;
@@ -75,7 +104,7 @@ void Talisma::Update(float dt) {
 }
 
 void Talisma::Render() {
-    talisma->Render();
+    atual->Render();
     if(exibeTexto){
         texto->Render();
     }
@@ -95,6 +124,8 @@ void Talisma::ReadText(std::string textfile) {
 }
 
 Talisma::~Talisma() {
-    delete talisma;
+    delete spriTable["Animated"];
+    delete spriTable["NotAnimated"];
+    delete spriTable["HUD"];
     delete texto;
 }

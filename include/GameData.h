@@ -10,6 +10,7 @@ class GameData {
 public:
     bool playerVictory = false;
     std::weak_ptr<GameObject> player;
+    std::shared_ptr<GameObject> hud;
 };
 
 
