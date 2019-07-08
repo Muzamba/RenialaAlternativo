@@ -11,7 +11,7 @@ MenuState::MenuState() : State () {
     texto = new GameObject();
     Sprite *textoSprite = new Sprite(*texto, "assets/img/penguin.png");
     texto->AddComponent(textoSprite);
-    texto->box.pos = {(1024/2) - textoSprite->GetWidth()/2, (600/2) + 100};
+    texto->box.pos = {(1280/2.0f) - textoSprite->GetWidth()/2, (720/2.0f) + 100};
 }
 
 void MenuState::Update(float dt) {
@@ -47,7 +47,7 @@ void MenuState::Start() {
 void MenuState::LoadAssets() {
     GameObject* gobg = new GameObject();
 	Sprite* sprite = new Sprite(*gobg, "assets/img/Background.jpg");
-	sprite->SetScale(0.75, 0.78);
+	sprite->SetScale(0.937042f, 0.9375f);
     gobg->AddComponent(sprite);
 	gobg->AddComponent(new CameraFollower(*gobg));
 	gobg->box.pos = {0,0};

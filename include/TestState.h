@@ -5,6 +5,7 @@ public:
 	TestState();
 	void LoadAssets() override;
 	void LoadPlataformas();
+	void LoadBg();
 
 	void Update(float dt) override;
 	void Render() override;

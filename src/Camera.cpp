@@ -17,13 +17,13 @@ void Camera::Unfollow() {
 void Camera::Update(float dt) {
 
     if(focus != nullptr) {
-        float auxX = focus->box.centro().x - 1024 / 2.0f;
-        float auxY = focus->box.centro().y - 600 / 2.0f;
+        float auxX = focus->box.centro().x - 1280 / 2.0f;
+        float auxY = focus->box.centro().y - 720 / 2.0f;
 
         if(auxX < 0) {
             auxX = 0;
-        } else if( auxX > 10300) {
-            auxX = 10300;
+        } else if( auxX > 10000) {
+            auxX = 10000;
         }
         if(auxY > 0) {
             auxY = 0;

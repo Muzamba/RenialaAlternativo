@@ -9,7 +9,7 @@ Game* Game::instance = nullptr;
 
 Game& Game::GetInstance() {
     if(!instance) {
-        instance = new Game("Reniala", 1024, 600);
+        instance = new Game("Reniala", 1280, 720);
     }
     return *instance;
 }

@@ -179,7 +179,7 @@ void Physic::NotifyCollision(GameObject& other) {
                     }
                     if(colDir.first == -1 and (distToEsq > distToDir and distDoEsq > distDoDir)) {
                         if(dirMovimentoX == -1) {
-                            associated.box.pos.x = collider->box.pos.x - valorX + 3;
+                            associated.box.pos.x = collider->box.pos.x - valorX ; //+3
                         }
                     }
                     
