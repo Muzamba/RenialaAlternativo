@@ -62,14 +62,14 @@ void TestState::LoadAssets() {
 
 	GameObject* goplayer = new GameObject();
 	Player* player = new Player(*goplayer);
-	goplayer->box.pos.x = 300;//11000;
+	goplayer->box.pos.x = 11000;//300;
 	goplayer->box.pos.y = 300;
 	Camera::Fallow(goplayer);
 	auto p = AddObject(goplayer);
 	Game::GetInstance().playerStatus.player = p;
 
 	GameObject* goWisp = new GameObject();
-	Wisp* wisp = new Wisp(*goWisp, p);
+	Wisp* wisp = new Wisp(*goWisp, p, false);
 	AddObject(goWisp);
 
 	

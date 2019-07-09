@@ -40,13 +40,13 @@ void Fase2::LoadAssets() {
     GameObject* goplayer = new GameObject();
 	Player* player = new Player(*goplayer);
 	goplayer->box.pos.x = -200;//300;
-	goplayer->box.pos.y = -1372 + 32 * 20;//300;
+	goplayer->box.pos.y = (-732);//300;
 	Camera::Fallow(goplayer);
     auto p = AddObject(goplayer);
 	Game::GetInstance().playerStatus.player = p;
 
     GameObject* goWisp = new GameObject();
-	Wisp* wisp = new Wisp(*goWisp, p);
+	Wisp* wisp = new Wisp(*goWisp, p, true);
 	AddObject(goWisp);
 
     //GameObject* test = new GameObject();

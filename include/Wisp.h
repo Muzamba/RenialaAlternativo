@@ -9,7 +9,7 @@
 
 class Wisp : public Component {
 public:
-    Wisp(GameObject& associated, std::weak_ptr<GameObject> player);
+    Wisp(GameObject& associated, std::weak_ptr<GameObject> player, bool fase2 = false);
 
     void Update(float dt) override;
     void Render() override;
@@ -18,6 +18,7 @@ private:
     std::weak_ptr<GameObject> player;
     Vec2 posRel;
     GameObject* luz;
+    bool fase2;
 };
 
 #endif //WISP_H
