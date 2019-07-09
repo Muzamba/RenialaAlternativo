@@ -9,6 +9,7 @@ void FadeOut::Begin() {
     ligaTimer = true;
     timer.Restart();
     alpha = 0;
+    telaPreta->SetAlphaChannel(alpha);
 }
 
 void FadeOut::Update(float dt) {
@@ -27,5 +28,9 @@ void FadeOut::Update(float dt) {
         }
 
     }
+}
+
+bool FadeOut::Is(std::string type) {
+    return type == "FadeOut";
 }
 

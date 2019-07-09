@@ -13,7 +13,7 @@ Wisp::Wisp(GameObject& associated, std::weak_ptr<GameObject> player, bool fase2)
     luz->AddComponent(new Sprite(*luz, "assets/img/BlackWithHole.png"));
 
     this->player = player;
-    posRel = {0.0f,0.0f};
+    posRel = {-20.0f,-20.0f};
     this->fase2 = fase2;
 }
 

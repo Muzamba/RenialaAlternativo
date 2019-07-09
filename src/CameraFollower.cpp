@@ -16,3 +16,8 @@ void CameraFollower::Render() {
 bool CameraFollower::Is(std::string type) {
     return type == "CameraFollower";
 }
+
+void CameraFollower::SetXY(int x, int y) {
+    xTela = x;
+    yTela = y;
+}
