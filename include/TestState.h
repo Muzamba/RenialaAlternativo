@@ -6,6 +6,8 @@ public:
 	void LoadAssets() override;
 	void LoadPlataformas();
 	void LoadBg();
+	void LoadCenarioFrente();
+	void LoadCenarioAtras();
 
 	void Update(float dt) override;
 	void Render() override;

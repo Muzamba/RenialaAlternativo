@@ -24,14 +24,23 @@ void TestState::LoadAssets() {
 	
 	LoadBg();
 
+	LoadPlataformas();
 
 
 	GameObject* goHUD = new GameObject();
 	HUD* hud = new HUD(*goHUD);
 	Game::GetInstance().playerStatus.hud = AddObject(goHUD).lock();
 
+	/*talisma*/
+	GameObject* talismaObject = new GameObject();
+	Talisma *talisma1 = new Talisma(*talismaObject, "assets/text/talisma1.txt", "assets/img/talismans/talisma_folha(1).png","assets/img/talismans/talisma_folha.png","assets/img/talismans/folha.png",0);
+	talismaObject->box.pos.x = 8850 + 220;//11000; 8900 - 50, 632 
+	talismaObject->box.pos.y = 550 ;//550;
+	//GameData::talismaArray.emplace_back(talisma1);
+	//talismaObject->AddComponent(talisma1);
+	((HUD*)Game::GetInstance().playerStatus.hud->GetComponent("HUD"))->AddTalisma(talismaObject);
 
-	LoadPlataformas();
+
 	
 	
 	//GameObject* goPlat = new GameObject();
@@ -60,6 +69,8 @@ void TestState::LoadAssets() {
 	//plat1Obj->box.pos = {0, 400};
 	//AddObject(plat1Obj);
 
+	LoadCenarioAtras();
+
 	GameObject* goplayer = new GameObject();
 	Player* player = new Player(*goplayer);
 	goplayer->box.pos.x = 11000;//300;
@@ -72,6 +83,8 @@ void TestState::LoadAssets() {
 	Wisp* wisp = new Wisp(*goWisp, p, false);
 	AddObject(goWisp);
 
+
+	LoadCenarioFrente();
 	
 
 
@@ -253,14 +266,7 @@ void TestState::LoadPlataformas() {
 	plat22Obj->box.pos = {8900 - 50, 632 };
 	AddObject(plat22Obj);
 
-	/*talisma*/
-	GameObject* talismaObject = new GameObject();
-	Talisma *talisma1 = new Talisma(*talismaObject, "assets/text/talisma1.txt", "assets/img/talismans/talisma_folha(1).png","assets/img/talismans/talisma_folha.png","assets/img/talismans/folha.png",0);
-	talismaObject->box.pos.x = plat22Obj->box.pos.x + 220;//11000;
-	talismaObject->box.pos.y = plat22Obj->box.pos.y - 60;//550;
-	//GameData::talismaArray.emplace_back(talisma1);
-	//talismaObject->AddComponent(talisma1);
-	((HUD*)Game::GetInstance().playerStatus.hud->GetComponent("HUD"))->AddTalisma(talismaObject);
+	
 
 	GameObject *plat23Obj = new GameObject();
 	plat23Obj->box.pos = {9732 - 50, 550 };
@@ -286,6 +292,9 @@ void TestState::LoadPlataformas() {
 	PlataformaFixa *plat27 = new PlataformaFixa(*plat27Obj, chao2, "assets/map/plat27.txt");
 	plat27Obj->box.pos = {10628 - 50, 600 };
 	AddObject(plat27Obj);
+
+
+	
 
 	//GameObject *platTransObj = new GameObject();
 	//TileSet* tileCaverna = new TileSet(32, 32, "assets/img/chao3.png");
@@ -353,3 +362,13 @@ void TestState::Start() {
 	LoadAssets();
 	StartArray();
 }
+
+void TestState::LoadCenarioAtras() {
+
+}
+
+void TestState::LoadCenarioFrente() {
+
+}
+
+
