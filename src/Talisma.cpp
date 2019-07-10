@@ -76,7 +76,7 @@ void Talisma::Update(float dt) {
         rangeText.pos.x = associated.box.pos.x - 100;
         rangeText.pos.y = associated.box.pos.y - 100;
         
-        auto player = Game::GetInstance().playerStatus.player.lock();
+        auto player = Game::GetInstance().playerStatus.player;
         if(player) {
             auto centro = player->box.centro();
             auto cameraFo = (CameraFollower*)associated.GetComponent("CameraFollower");

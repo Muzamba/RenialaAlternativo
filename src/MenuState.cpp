@@ -6,6 +6,7 @@
 #include "Sprite.h"
 #include "Music.h"
 #include "FadeOut.h"
+#include "ArvoreState.h"
 
 MenuState::MenuState() : State () {
     mostrarTexto = true;
@@ -27,7 +28,7 @@ void MenuState::Update(float dt) {
     }
     if(((FadeOut*)fadeOut->GetComponent("FadeOut"))->timer.Get() > 1.5f) {
         popRequested = true;
-        Game::GetInstance().Push(new TestState());
+        Game::GetInstance().Push(new ArvoreState());
     }
 }
 

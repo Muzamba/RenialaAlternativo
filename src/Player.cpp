@@ -41,6 +41,7 @@ Player::Player(GameObject& associated) : Component(associated), atual(nullptr), 
 
 	soundPassos = false;
 	pegarItem = false;
+	dialogo = false;
 	
 	//associated.box.pos = {300,300};
 

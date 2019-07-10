@@ -14,11 +14,12 @@ public:
     void Update(float dt) override;
     void Render() override;
     bool Is(std::string type) override;
+    bool fase2;
 private:
     std::weak_ptr<GameObject> player;
     Vec2 posRel;
     GameObject* luz;
-    bool fase2;
+    bool animacao;
 };
 
 #endif //WISP_H
