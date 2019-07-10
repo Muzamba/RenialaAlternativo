@@ -8,7 +8,7 @@
 #include "Camera.h"
 
 
-Sprite::Sprite(GameObject& associated, float frameTime, int frameCount, float secondsToSelfDestuct) :   Component(associated),
+Sprite::Sprite(GameObject& associated, float frameTime, int frameCount, float secondsToSelfDestuct, Vec2 multi) :   Component(associated),
                                                                                                         texture(nullptr),
                                                                                                         width(0),
                                                                                                         height(0),
@@ -20,11 +20,12 @@ Sprite::Sprite(GameObject& associated, float frameTime, int frameCount, float se
                                                                                                         timeElapsed(0),
                                                                                                         frameTime(frameTime),
                                                                                                         selfDestructCount(),
-                                                                                                        secondsToSelfDestruct(secondsToSelfDestuct)
+                                                                                                        secondsToSelfDestruct(secondsToSelfDestuct),
+                                                                                                        multi(multi)
                                                                                                          {
 }
 
-Sprite::Sprite(GameObject& associated ,std::string file, int p_x, int p_y, float frameTime, int frameCount, float secondsToSelfDestuct) :   Component(associated),
+Sprite::Sprite(GameObject& associated ,std::string file,int p_x, int p_y, float frameTime, int frameCount, float secondsToSelfDestuct, Vec2 multi) :   Component(associated),
                                                                                                                                             texture(nullptr),
                                                                                                                                             width(0),
                                                                                                                                             height(0),
@@ -36,7 +37,8 @@ Sprite::Sprite(GameObject& associated ,std::string file, int p_x, int p_y, float
                                                                                                                                             timeElapsed(0),
                                                                                                                                             frameTime(frameTime),
                                                                                                                                             selfDestructCount(),
-                                                                                                                                            secondsToSelfDestruct(secondsToSelfDestuct)
+                                                                                                                                            secondsToSelfDestruct(secondsToSelfDestuct),
+                                                                                                                                            multi(multi)
                                                                                                                                             {
     Open(std::move(file), p_x, p_y);
 }
@@ -63,7 +65,7 @@ void Sprite::SetClip(int x, int y, int w, int h) {
 
 void Sprite::Render() {
 
-    Render(associated.box.pos.x - Camera::pos.x, associated.box.pos.y - Camera::pos.y);
+    Render(associated.box.pos.x - multi.x * Camera::pos.x, associated.box.pos.y - multi.y * Camera::pos.y);
 }
 
 int Sprite::GetHeight() const{
@@ -160,6 +162,17 @@ void Sprite::SetFrame(int frame) {
 
 void Sprite::SetFlip(bool flip) {
     this->flip = flip;
+}
+
+void Sprite::SetAlphaChannel(unsigned int alpha) {
+
+    SDL_SetTextureBlendMode(texture.get(), SDL_BLENDMODE_BLEND);
+    SDL_SetTextureAlphaMod(texture.get(), alpha);
+    
+}
+
+void Sprite::SetCamMulti(Vec2 multi) {
+    this->multi = multi;
 }
 
 

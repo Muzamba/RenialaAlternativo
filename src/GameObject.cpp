@@ -11,7 +11,7 @@ GameObject::~GameObject(){
 void GameObject::Update(float dt) {
     //box.x = box.x + Camera::pos.x;
     //box.y = box.y + Camera::pos.y;
-    for(uint i = 0; i < components.size();i++) {
+    for(unsigned int i = 0; i < components.size();i++) {
         components[i]->Update(dt);
     }
 }

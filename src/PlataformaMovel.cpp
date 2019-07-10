@@ -48,7 +48,7 @@ void PlataformaMovel::NotifyCollision(GameObject& other) {
     auto player = (Player*)other.GetComponent("Player");
     auto colliderOther = (Collider*)other.GetComponent("Collider");
     auto collider = (Collider*)associated.GetComponent("Collider");
-    uint dif;
+    unsigned int dif;
     auto valorX = (other.box.size.x - colliderOther->box.size.x)/2;
 
 

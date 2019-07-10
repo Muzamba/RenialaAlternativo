@@ -39,20 +39,20 @@ bool State::QuitRequested() {
 }
 
 void State::StartArray() {
-    for(uint i = 0;i < objectArray.size();++i) {
+    for(unsigned int i = 0;i < objectArray.size();++i) {
         objectArray[i]->Start();
     }
     started = true;
 }
 
 void State::UpdateArray(float dt) {
-    for(uint i = 0;i < objectArray.size();++i) {
+    for(unsigned int i = 0;i < objectArray.size();++i) {
         objectArray[i]->Update(dt);
     }
 }
 
 void State::RenderArray() {
-    for(uint i = 0;i < objectArray.size();++i) {
+    for(unsigned int i = 0;i < objectArray.size();++i) {
         objectArray[i]->Render();
     }
 }

@@ -16,8 +16,8 @@
 
 class Sprite : public Component {
 public:
-    explicit Sprite(GameObject& associated, float frameTime = 1, int frameCount = 1, float secondsToSelfDestuct = 0);
-    Sprite(GameObject& associated, std::string file, int p_x = 0, int p_y = 0, float frameTime = 1, int frameCount = 1, float secondsToSelfDestuct = 0);
+    explicit Sprite(GameObject& associated, float frameTime = 1, int frameCount = 1, float secondsToSelfDestuct = 0, Vec2 multi = {1,1});
+    Sprite(GameObject& associated, std::string file, int p_x = 0, int p_y = 0, float frameTime = 1, int frameCount = 1, float secondsToSelfDestuct = 0, Vec2 multi = {1,1});
     ~Sprite() override;
 
     void Open(std::string file, int p_x, int p_y);
@@ -42,6 +42,9 @@ public:
 
     void SetFlip(bool flip);
 
+    void SetAlphaChannel(unsigned int alpha);
+    void SetCamMulti(Vec2 multi);
+
 
 
 private:
@@ -58,6 +61,7 @@ private:
     float frameTime;
     Timer selfDestructCount;
     float secondsToSelfDestruct;
+    Vec2 multi;
 };
 
 #endif

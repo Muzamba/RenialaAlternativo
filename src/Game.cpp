@@ -9,7 +9,7 @@ Game* Game::instance = nullptr;
 
 Game& Game::GetInstance() {
     if(!instance) {
-        instance = new Game("Reniala", 1024, 600);
+        instance = new Game("Reniala", 1280, 720);
     }
     return *instance;
 }
@@ -140,6 +140,8 @@ void Game::Run() {
         //printf("3\n");
         stateStack.top()->Render();
         //printf("4\n");
+
+
         SDL_RenderPresent(renderer);
         //printf("5\n");
         SDL_Delay(33);

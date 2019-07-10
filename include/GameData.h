@@ -1,15 +1,24 @@
 #ifndef GAMEDATA_H
 #define GAMEDATA_H
 
-#include "Timer.h"
-#include "Physic.h"
 #include "GameObject.h"
+#include "Physic.h"
+#include "State.h"
+#include "Talisma.h"
+#include "Timer.h"
 #include <memory>
+#include <vector>
 
 class GameData {
 public:
-    bool playerVictory = false;
-    std::weak_ptr<GameObject> player;
+    static bool playerVictory;
+    static std::weak_ptr<GameObject> player;
+    static std::shared_ptr<GameObject> hud;
+	static std::vector<Talisma*> talismaArray;
+	static State* state;
+	static bool playerContaisTalisma;
+	static Rect& talismaColidido;
+	void LoadTalismas();
 };
 
 

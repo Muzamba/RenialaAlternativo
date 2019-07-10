@@ -12,7 +12,7 @@ TileSet::TileSet(int tileWidth, int tileHeight, const std::string& file) : xabla
 }
 
 void TileSet::RenderTile(unsigned index, float x, float y) {
-    if(index <= (uint)(rows * columns - 1)) {
+    if(index <= (unsigned int)(rows * columns - 1)) {
         int linha = std::round(index / columns);
         int coluna = std::round(index % columns);
 
