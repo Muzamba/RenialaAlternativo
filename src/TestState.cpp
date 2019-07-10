@@ -76,12 +76,12 @@ void TestState::LoadAssets() {
 	goplayer->box.pos.x = 11000;//300;
 	goplayer->box.pos.y = 300;
 	Camera::Fallow(goplayer);
-	auto p = AddObject(goplayer);
+	auto p = AddObject(goplayer).lock();
 	Game::GetInstance().playerStatus.player = p;
 
-	GameObject* goWisp = new GameObject();
-	Wisp* wisp = new Wisp(*goWisp, p, false);
-	AddObject(goWisp);
+	//GameObject* goWisp = new GameObject();
+	//Wisp* wisp = new Wisp(*goWisp, p, false);
+	//AddObject(goWisp);
 
 
 	LoadCenarioFrente();
@@ -308,7 +308,7 @@ void TestState::LoadPlataformas() {
 void TestState::Update(float dt) {
 	Camera::Update(dt);
 	UpdateArray(dt);
-	if(Game::GetInstance().playerStatus.player.lock()->box.pos.x > 11100) {
+	if(Game::GetInstance().playerStatus.player->box.pos.x > 11100) {
 		static GameObject* fadeOutObj = new GameObject();
 		static FadeOut* fadeOut = new FadeOut(*fadeOutObj, 1.0f);
 		static bool firstRun = true;
@@ -323,13 +323,13 @@ void TestState::Update(float dt) {
 			Game::GetInstance().Push(new Fase2());
 		}
 	}
-	if(Game::GetInstance().playerStatus.player.lock()->box.pos.y > 720) {
-		Game::GetInstance().playerStatus.player.lock()->box.pos = {300,300};
+	if(Game::GetInstance().playerStatus.player->box.pos.y > 720) {
+		Game::GetInstance().playerStatus.player->box.pos = {300,300};
 	}
 	if (InputManager::GetInstance().KeyPress(ESCAPE_KEY) || InputManager::GetInstance().QuitRequested()) {
 		quitRequested = true;
 	}
-	for(uint i = 0;i < objectArray.size();++i) {
+	for(unsigned int i = 0;i < objectArray.size();++i) {
         auto collider1 = (Collider*)objectArray[i]->GetComponent("Collider");
         if(collider1 != nullptr) {
             for (uint j = i + 1; j < objectArray.size(); ++j) {

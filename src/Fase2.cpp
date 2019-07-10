@@ -42,12 +42,12 @@ void Fase2::LoadAssets() {
 	goplayer->box.pos.x = -200;//300;
 	goplayer->box.pos.y = (-732);//300;
 	Camera::Fallow(goplayer);
-    auto p = AddObject(goplayer);
+    auto p = AddObject(goplayer).lock();
 	Game::GetInstance().playerStatus.player = p;
 
-    GameObject* goWisp = new GameObject();
-	Wisp* wisp = new Wisp(*goWisp, p, true);
-	AddObject(goWisp);
+    //GameObject* goWisp = new GameObject();
+	//Wisp* wisp = new Wisp(*goWisp, p, true);
+	//AddObject(goWisp);
 
     //GameObject* test = new GameObject();
     //test->AddComponent(new Sprite(*test, "assets/img/BlackWithHole.png"));

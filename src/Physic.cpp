@@ -21,7 +21,7 @@ void Physic::Update(float dt) {
             break;
         
         case JOGADOR:
-            if (!player->pegarItem) {
+            if (!player->pegarItem and !player->dialogo) {
             if (im.IsKeyDown(D_KEY) or im.IsKeyDown(A_KEY) or im.KeyPress(W_KEY)) {
 		        if(im.IsKeyDown(D_KEY) or im.IsKeyDown(A_KEY)) {
                     float velo = 200;

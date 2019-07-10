@@ -22,6 +22,7 @@ public:
 	void NotifyCollision(GameObject& other);
 
     bool pegarItem;
+    bool dialogo;
 private:
 	//Vec2d speed;
     Sprite* atual;
