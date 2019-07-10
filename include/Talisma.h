@@ -7,6 +7,7 @@
 #include "Timer.h"
 #include <unordered_map>
 #include <string>
+#include "Sound.h"
 
 
 class Talisma : public Component {
@@ -36,6 +37,9 @@ private:
     int indice;
     Timer timer;
     bool ligaBrilho;
+    bool animacao;
+    Sound* sound;
+
 };
 
 #endif

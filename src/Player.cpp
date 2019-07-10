@@ -23,22 +23,54 @@ Player::Player(GameObject& associated) : Component(associated), atual(nullptr), 
 	sprite->SetScale(2, 2);
 	spriteMap["jump"] = sprite;
 
+	sprite = new Sprite(associated, "assets/img/item.png", 100, 100, 0.111f, 9);
+	sprite->SetScale(2, 2);
+	spriteMap["item"] = sprite;
+
+	auto sound = new Sound(associated, "assets/sound/Passos.ogg");
+	soundMap["walk"] = sound;
+	soundMap["item"] = new Sound(associated,"assets/sound/COLETA DE ITEM.ogg");
+	associated.AddComponent(soundMap["walk"]);
+
+
 	associated.AddComponent(new Collider(associated, {1/8.0f, 1/2.8f}, {0,10}));
 
 	associated.AddComponent(new Physic(associated, Physic::JOGADOR));
 	auto gravidade = new Gravidade(associated, 800);
 	associated.AddComponent(gravidade);
+
+	soundPassos = false;
+	pegarItem = false;
+	dialogo = false;
 	
 	//associated.box.pos = {300,300};
 
 }
 
 Player::~Player() {
-	
+	delete spriteMap["idle"];
+	delete spriteMap["walk"];
+	delete spriteMap["jump"];	
 }
 
 void Player::Update(float dt) {
+	static bool one = true;
 	
+	if(pegarItem){
+		atual = spriteMap["item"];
+		if(animacaoItem.Get() < 2.0f){
+			animacaoItem.Update(dt);
+		} else {
+			animacaoItem.Restart();
+			pegarItem = false;
+		}
+		static bool one2 = true;
+		if (one2) {
+			one2 = false;
+			soundMap["item"]->Play(1);
+		}
+		
+	} else {
 	auto& im = InputManager::GetInstance();
 	auto gravidade = (Gravidade*)associated.GetComponent("Gravidade");
 	//atual = spriteMap["idle"];
@@ -49,12 +81,18 @@ void Player::Update(float dt) {
 			atual->SetFlip(false);
 			spriteMap["idle"]->SetFlip(false);
 			spriteMap["jump"]->SetFlip(false);
+			spriteMap["item"]->SetFlip(false);
+			soundPassos = true;
 		}
 		else if (im.IsKeyDown(A_KEY)) {	
 			atual = spriteMap["walk"];
 			atual->SetFlip(true);
 			spriteMap["idle"]->SetFlip(true);
 			spriteMap["jump"]->SetFlip(true);
+			spriteMap["item"]->SetFlip(true);
+			soundPassos = true;
+		} else {
+			soundPassos = false;
 		}
 		spriteMap["jump"]->SetFrame(2);
 		if (im.KeyPress(W_KEY) && jumps < 2) {
@@ -65,6 +103,8 @@ void Player::Update(float dt) {
 			//}
 		}
 	} else {
+		soundPassos = false;
+		//soundMap["walk"]->Stop();
 		atual = spriteMap["jump"];
 		if (im.KeyPress(W_KEY) and jumps < 2) {
 			//if (gravidade->GetGrounded()) {
@@ -82,11 +122,21 @@ void Player::Update(float dt) {
 			spriteMap["idle"]->SetFlip(true);
 		}
 	}
+	}
 
 	
 	atual->Update(dt);
-
-
+	static bool control = false;
+	if(soundPassos and one) {
+		soundMap["walk"]->Play(-1);
+		//soundMap["test"]->Play();
+		one = false;
+		control = true;
+	} else if(!soundPassos and control){
+		soundMap["walk"]->Stop();
+		control = false;
+		one = true;
+	}
 
 }
 
@@ -101,4 +151,5 @@ bool Player::Is(std::string type) {
 
 void Player::NotifyCollision(GameObject& other) {
 	jumps = 0;
+	//soundPassos = false;
 }

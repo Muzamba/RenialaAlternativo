@@ -3,6 +3,7 @@
 #include "Gravidade.h"
 #include "InputManager.h"
 #include <cmath>
+#include "Player.h"
 
 
 Physic::Physic(GameObject& associated, Type tipo) : Component(associated), tipo(tipo), dirMovimentoX(0), dirMovimentoY(0), jumps(0), posAnteriorPlayer({0, 0}) {}
@@ -13,12 +14,14 @@ void Physic::Update(float dt) {
     auto& im = InputManager::GetInstance();
     auto gravidade = (Gravidade*)associated.GetComponent("Gravidade");
     dirMovimentoX = 0;
+    auto player = (Player*)associated.GetComponent("Player");
 
     switch(tipo){
         case CHAO:
             break;
         
         case JOGADOR:
+            if (!player->pegarItem and !player->dialogo) {
             if (im.IsKeyDown(D_KEY) or im.IsKeyDown(A_KEY) or im.KeyPress(W_KEY)) {
 		        if(im.IsKeyDown(D_KEY) or im.IsKeyDown(A_KEY)) {
                     float velo = 200;
@@ -44,6 +47,7 @@ void Physic::Update(float dt) {
 			    //}
 
 		        }
+            }
 		
 	        }
             break;

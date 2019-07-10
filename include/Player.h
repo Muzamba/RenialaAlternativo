@@ -6,6 +6,8 @@
 #include <memory>
 #include "Sprite.h"
 #include "Geometric.h"
+#include "Sound.h"
+#include "Timer.h"
 
 
 class Player : public Component {
@@ -19,12 +21,17 @@ public:
 
 	void NotifyCollision(GameObject& other);
 
+    bool pegarItem;
+    bool dialogo;
 private:
 	//Vec2d speed;
     Sprite* atual;
     std::unordered_map<std::string,Sprite*> spriteMap;
+    std::unordered_map<std::string,Sound*> soundMap;
     bool grounded;
 	int jumps;
+    bool soundPassos;
+    Timer animacaoItem;
     
 };
 

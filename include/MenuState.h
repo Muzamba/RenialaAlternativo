@@ -3,6 +3,8 @@
 #include "Text.h"
 #include "GameObject.h"
 #include "Timer.h"
+#include "Music.h"
+
 class MenuState : public State {
 public:
 	MenuState();
@@ -20,4 +22,6 @@ private:
 	GameObject *goTextbg;
 	bool mostrarTexto;
 	Timer textCounter;
+	Music* musica;
+	GameObject* fadeOut;
 };

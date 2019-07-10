@@ -9,6 +9,8 @@ public:
 
     void Begin() override;
     void Update(float dt) override;
+
+    bool Is(std::string type) override;
 };
 
 

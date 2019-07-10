@@ -11,6 +11,8 @@
 #include "CameraFollower.h"
 #include "BoxState.h"
 #include "HUD.h"
+#include "Player.h"
+#include "Sound.h"
 
 Talisma::Talisma(GameObject& associated, std::string textfile, std::string imgfileInGame, std::string imgfileNoAnim, std::string imgfileHUD, int indice) : Component(associated) {
     
@@ -40,13 +42,19 @@ Talisma::Talisma(GameObject& associated, std::string textfile, std::string imgfi
     this->indice = indice;
     timer.Restart();
     ligaBrilho = false;
+    animacao = false;
+
+    //sound = new Sound(associated, "assets/sound/TRILHA SONORA.ogg");
     
+    //associated.AddComponent(sound);
 }
 
 void Talisma::Update(float dt) {
     timer.Update(dt);
     atual->Update(dt);
     auto& im = InputManager::GetInstance();
+    static Vec2 dir = {0,0};
+    static int velo = 0;
     if(!coletado) {
         //timer.Update(dt);
         if(ligaBrilho){
@@ -68,21 +76,46 @@ void Talisma::Update(float dt) {
         rangeText.pos.x = associated.box.pos.x - 100;
         rangeText.pos.y = associated.box.pos.y - 100;
         
-        auto player = Game::GetInstance().playerStatus.player.lock();
+        auto player = Game::GetInstance().playerStatus.player;
         if(player) {
             auto centro = player->box.centro();
-            if(rangeText.estaDentro(centro.x, centro.y)) {
+            auto cameraFo = (CameraFollower*)associated.GetComponent("CameraFollower");
+            if(rangeText.estaDentro(centro.x, centro.y) and !animacao) {
                 exibeTexto = true;
                 if(im.KeyPress(SDLK_x)) {
                     //coleta o item
-                    coletado = true;
+                    //coletado = true;
                     exibeTexto = false;
+                    animacao = true;
+                    //animação
+                    //atual = spriTable["HUD"];
+                    //associated.box.size.x = atual->GetWidth();
+                    //associated.box.size.y = atual->GetHeight();
+                    //cameraFo = new CameraFollower(associated, associated.box.pos.x - Camera::pos.x, associated.box.pos.y - Camera::pos.y);
+                    //associated.AddComponent(cameraFo);// tirar essa pos
+                    dir = {(90 + 44 * indice) + Camera::pos.x - associated.box.pos.x, 25 + Camera::pos.y - associated.box.pos.y};
+                    velo = dir.magnitude() / 2.0f;
+                    dir = dir.normalizado();
+                    ((Player*)player->GetComponent("Player"))->pegarItem = true;
+                    //sound->Play();
+                    
+                    
+                    //Game::GetInstance().Push(new BoxState(talismaFile, text));
+                }
+            } else if(animacao) {
+                if(associated.box.pos.x - (90 + 44 * indice) > 10 and associated.box.pos.y - 25 > 10) {
+                    
+                    associated.box.pos = associated.box.pos + dir * velo * dt; 
+                } else {
+                    spriTable["HUD"]->SetCamMulti({0,0});
+                    associated.box.pos = {90 + 44 * indice, 25};
                     atual = spriTable["HUD"];
                     associated.box.size.x = atual->GetWidth();
                     associated.box.size.y = atual->GetHeight();
-                    associated.AddComponent(new CameraFollower(associated, 90 + 44 * indice, 25 ));
-                    //Game::GetInstance().Push(new BoxState(talismaFile, text));
+                    animacao = false;
+                    coletado = true;
                 }
+
             } else {
                 exibeTexto = false;
             }

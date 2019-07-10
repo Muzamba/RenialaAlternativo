@@ -5,6 +5,9 @@
 #include "Cutscene.h"
 #include "CameraFollower.h"
 #include "Sprite.h"
+#include "Music.h"
+#include "FadeOut.h"
+#include "ArvoreState.h"
 
 MenuState::MenuState() : State () {
     mostrarTexto = true;
@@ -13,12 +16,19 @@ MenuState::MenuState() : State () {
 void MenuState::Update(float dt) {
     textCounter.Update(dt);
     this->UpdateArray(dt);
+    fadeOut->Update(dt);
     if (InputManager::GetInstance().KeyPress(SDLK_SPACE)) {
         Game::GetInstance().Push(new Cutscene());
+        ((FadeOut*)fadeOut->GetComponent("FadeOut"))->Begin();
+        musica->Stop();
     }
     if (textCounter.Get() > 1.2) {
         mostrarTexto = !mostrarTexto;
         textCounter.Restart();
+    }
+    if(((FadeOut*)fadeOut->GetComponent("FadeOut"))->timer.Get() > 1.5f) {
+        popRequested = true;
+        Game::GetInstance().Push(new ArvoreState());
     }
 }
 
@@ -28,6 +38,7 @@ void MenuState::Render() {
         goTextbg->Render();
         texto->Render();
     }
+    fadeOut->Render();
 }
 
 void MenuState::Pause() {}
@@ -60,4 +71,10 @@ void MenuState::LoadAssets() {
     Text *textoFonte = new Text(*texto, "assets/font/PixelFont.otf", 20, Text::BLENDED, "APERTE SPACE PARA JOGAR", {255,255,255,255});
     texto->box.pos = {centro.x + (350/2), centro.y + 10};
     texto->AddComponent(textoFonte);
+
+    musica = new Music("assets/sound/TRILHA SONORA.ogg");
+    musica->Play();
+
+    fadeOut = new GameObject();
+    fadeOut->AddComponent(new FadeOut(*fadeOut, 1.5f));
 }

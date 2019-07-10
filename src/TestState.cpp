@@ -14,6 +14,7 @@
 #include "HUD.h"
 #include "Fase2.h"
 #include "FadeOut.h"
+#include "Wisp.h"
 
 TestState::TestState() : State() {
 
@@ -23,14 +24,23 @@ void TestState::LoadAssets() {
 	
 	LoadBg();
 
+	LoadPlataformas();
 
 
 	GameObject* goHUD = new GameObject();
 	HUD* hud = new HUD(*goHUD);
 	Game::GetInstance().playerStatus.hud = AddObject(goHUD).lock();
 
+	/*talisma*/
+	GameObject* talismaObject = new GameObject();
+	Talisma *talisma1 = new Talisma(*talismaObject, "assets/text/talisma1.txt", "assets/img/talismans/talisma_folha(1).png","assets/img/talismans/talisma_folha.png","assets/img/talismans/folha.png",0);
+	talismaObject->box.pos.x = 8850 + 220;//11000; 8900 - 50, 632 
+	talismaObject->box.pos.y = 550 ;//550;
+	//GameData::talismaArray.emplace_back(talisma1);
+	//talismaObject->AddComponent(talisma1);
+	((HUD*)Game::GetInstance().playerStatus.hud->GetComponent("HUD"))->AddTalisma(talismaObject);
 
-	LoadPlataformas();
+
 	
 	
 	//GameObject* goPlat = new GameObject();
@@ -59,13 +69,22 @@ void TestState::LoadAssets() {
 	//plat1Obj->box.pos = {0, 400};
 	//AddObject(plat1Obj);
 
+	LoadCenarioAtras();
+
 	GameObject* goplayer = new GameObject();
 	Player* player = new Player(*goplayer);
 	goplayer->box.pos.x = 11000;//300;
 	goplayer->box.pos.y = 300;
 	Camera::Fallow(goplayer);
-	Game::GetInstance().playerStatus.player = AddObject(goplayer);
+	auto p = AddObject(goplayer).lock();
+	Game::GetInstance().playerStatus.player = p;
 
+	//GameObject* goWisp = new GameObject();
+	//Wisp* wisp = new Wisp(*goWisp, p, false);
+	//AddObject(goWisp);
+
+
+	LoadCenarioFrente();
 	
 
 
@@ -247,14 +266,7 @@ void TestState::LoadPlataformas() {
 	plat22Obj->box.pos = {8900 - 50, 632 };
 	AddObject(plat22Obj);
 
-	/*talisma*/
-	GameObject* talismaObject = new GameObject();
-	Talisma *talisma1 = new Talisma(*talismaObject, "assets/text/talisma1.txt", "assets/img/talismans/talisma_folha(1).png","assets/img/talismans/talisma_folha.png","assets/img/talismans/folha.png",0);
-	talismaObject->box.pos.x = plat22Obj->box.pos.x + 220;//11000;
-	talismaObject->box.pos.y = plat22Obj->box.pos.y - 60;//550;
-	//GameData::talismaArray.emplace_back(talisma1);
-	//talismaObject->AddComponent(talisma1);
-	((HUD*)Game::GetInstance().playerStatus.hud->GetComponent("HUD"))->AddTalisma(talismaObject);
+	
 
 	GameObject *plat23Obj = new GameObject();
 	plat23Obj->box.pos = {9732 - 50, 550 };
@@ -281,6 +293,9 @@ void TestState::LoadPlataformas() {
 	plat27Obj->box.pos = {10628 - 50, 600 };
 	AddObject(plat27Obj);
 
+
+	
+
 	//GameObject *platTransObj = new GameObject();
 	//TileSet* tileCaverna = new TileSet(32, 32, "assets/img/chao3.png");
 	//PlataformaFixa *platTras = new PlataformaFixa(*platTransObj,tileCaverna,"assets/map/platTras1.txt");
@@ -293,7 +308,7 @@ void TestState::LoadPlataformas() {
 void TestState::Update(float dt) {
 	Camera::Update(dt);
 	UpdateArray(dt);
-	if(Game::GetInstance().playerStatus.player.lock()->box.pos.x > 11100) {
+	if(Game::GetInstance().playerStatus.player->box.pos.x > 11100) {
 		static GameObject* fadeOutObj = new GameObject();
 		static FadeOut* fadeOut = new FadeOut(*fadeOutObj, 1.0f);
 		static bool firstRun = true;
@@ -308,13 +323,13 @@ void TestState::Update(float dt) {
 			Game::GetInstance().Push(new Fase2());
 		}
 	}
-	if(Game::GetInstance().playerStatus.player.lock()->box.pos.y > 720) {
-		Game::GetInstance().playerStatus.player.lock()->box.pos = {300,300};
+	if(Game::GetInstance().playerStatus.player->box.pos.y > 720) {
+		Game::GetInstance().playerStatus.player->box.pos = {300,300};
 	}
 	if (InputManager::GetInstance().KeyPress(ESCAPE_KEY) || InputManager::GetInstance().QuitRequested()) {
 		quitRequested = true;
 	}
-	for(uint i = 0;i < objectArray.size();++i) {
+	for(unsigned int i = 0;i < objectArray.size();++i) {
         auto collider1 = (Collider*)objectArray[i]->GetComponent("Collider");
         if(collider1 != nullptr) {
             for (uint j = i + 1; j < objectArray.size(); ++j) {
@@ -347,3 +362,13 @@ void TestState::Start() {
 	LoadAssets();
 	StartArray();
 }
+
+void TestState::LoadCenarioAtras() {
+
+}
+
+void TestState::LoadCenarioFrente() {
+
+}
+
+
