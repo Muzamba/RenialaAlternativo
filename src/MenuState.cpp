@@ -2,6 +2,7 @@
 #include "InputManager.h"
 #include "Game.h"
 #include "TestState.h"
+#include "Cutscene.h"
 #include "CameraFollower.h"
 #include "Sprite.h"
 
@@ -13,7 +14,7 @@ void MenuState::Update(float dt) {
     textCounter.Update(dt);
     this->UpdateArray(dt);
     if (InputManager::GetInstance().KeyPress(SDLK_SPACE)) {
-        Game::GetInstance().Push(new TestState());
+        Game::GetInstance().Push(new Cutscene());
     }
     if (textCounter.Get() > 1.2) {
         mostrarTexto = !mostrarTexto;
@@ -57,6 +58,6 @@ void MenuState::LoadAssets() {
 
     texto = new GameObject();
     Text *textoFonte = new Text(*texto, "assets/font/PixelFont.otf", 20, Text::BLENDED, "APERTE SPACE PARA JOGAR", {255,255,255,255});
-    texto->AddComponent(textoFonte);
     texto->box.pos = {centro.x + (350/2), centro.y + 10};
+    texto->AddComponent(textoFonte);
 }
