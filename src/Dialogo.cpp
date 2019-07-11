@@ -3,6 +3,8 @@
 #include "Text.h"
 #include "Game.h"
 #include "Player.h"
+#include "CameraFollower.h"
+
 
 
 Dialogo::Dialogo(GameObject& associated) : Component(associated) {
@@ -19,14 +21,14 @@ Dialogo::Dialogo(GameObject& associated) : Component(associated) {
     faceTable["boneco"]->SetScale(2,2);
     faceTable["wisp"]->SetScale(2,2);
     faceTable["arvore"]->SetScale(2,2);
-    face->box.pos = {100,650};
+    face->box.pos = {80,625};
 
     on = false;
 
     box = new GameObject();
-    auto sprite = new Sprite(*box, "assets/img/Dialogo/caixa_dialogo.png", 0, 0, 0.1666666f, 6);
+    auto sprite = new Sprite(*box, "assets/img/Dialogo/caixa_dialogo.png", 0, 0, 0.5f/7.0f, 7);
     sprite->SetCamMulti({0,0});
-    sprite->SetScale(2,2);
+    sprite->SetScale(5.5,2);
     box->AddComponent(sprite);
     box->box.pos = {50,600};
 
@@ -34,13 +36,17 @@ Dialogo::Dialogo(GameObject& associated) : Component(associated) {
     sprite = new Sprite(*button, "assets/img/Dialogo/setinha_dialogo.png");
     sprite->SetCamMulti({0,0});
     button->AddComponent(sprite);
-    button->box.pos = {500,700};
+    button->box.pos = {1200,680};
 
     timer.Restart();
+    timerButton.Restart();
 
     texto = new GameObject();
+    texto->AddComponent(new CameraFollower(*texto, 150, 645));
     texto->AddComponent(new Text(*texto, "assets/font/herculanum.ttf", 20, Text::BLENDED, "", {0,0,0,255}));
-    texto->box.pos = {180, 650};
+    //texto->box.pos = {150, 645};
+
+    piscaButton = false;
     
 }
 
@@ -50,11 +56,25 @@ Dialogo::~Dialogo() {
 
 
 void Dialogo::Update(float dt) {
+    texto->Update(dt);
     if(on){
-        if(timer.Get() < 1.0f){
+        if(timer.Get() < 0.47f){
             box->Update(dt);
             timer.Update(dt);
         } else {
+            timerButton.Update(dt);
+
+            if(piscaButton) {
+                if(timerButton.Get() > 1.5f) {
+                    timerButton.Restart();
+                    piscaButton = false;
+                }
+            } else {
+                if(timerButton.Get() > 1.0f) {
+                    timerButton.Restart();
+                    piscaButton = true;
+                }
+            }
             auto& im = InputManager::GetInstance();
             if(im.KeyPress(SDLK_SPACE)) {
                 on = false;
@@ -67,10 +87,12 @@ void Dialogo::Update(float dt) {
 void Dialogo::Render() {
     if(on){
         box->Render();
-        if(timer.Get() > 1.0f ){
+        if(timer.Get() > 0.46f ){
             faceTable[quem]->Render();
             texto->Render();
-            button->Render();
+            if(piscaButton){
+                button->Render();
+            }
         }
     }
 }

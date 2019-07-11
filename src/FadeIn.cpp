@@ -50,4 +50,5 @@ void FadeIn::Begin() {
     ligaTimer = true;
     timer.Restart();
     alpha = 255;
+    telaPreta->SetAlphaChannel(alpha);
 }

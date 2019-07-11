@@ -2,6 +2,7 @@
 #define ARVORESTATE_H
 
 #include "State.h"
+#include "Timer.h"
 
 
 class ArvoreState : public State {
@@ -19,6 +20,9 @@ public:
 
 private:
     GameObject* arvore;
+    GameObject* fadeOut;
+    GameObject* fadeIn;
+    Timer timerFade;
 
 };
 

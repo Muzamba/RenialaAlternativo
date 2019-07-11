@@ -4,6 +4,7 @@ std::unordered_map<std::string, std::shared_ptr<SDL_Texture>> Resources::imageTa
 std::unordered_map<std::string, std::shared_ptr<Mix_Music>> Resources::musicTable;
 std::unordered_map<std::string, std::shared_ptr<Mix_Chunk>> Resources::soundTable;
 std::unordered_map<std::pair<std::string,int>, std::shared_ptr<TTF_Font>, pair_hash> Resources::fontTable;
+std::unordered_map<std::string,std::shared_ptr<TileSet>> Resources::tileSetTable;
 
 std::shared_ptr<SDL_Texture> Resources::GetImage(std::string file) {
     auto temp = Resources::imageTable.find(file);
@@ -127,5 +128,30 @@ void Resources::ClearFonts() {
         } else {
             it++;
         }
+    }
+}
+
+
+std::shared_ptr<TileSet> Resources::GetTileSet(std::string file) {
+    auto temp = Resources::tileSetTable.find(file);
+    if(temp == Resources::tileSetTable.end()) {
+        TileSet* tileSet = nullptr;
+        tileSet = new TileSet(32,32,file);
+        auto tile = std::shared_ptr<TileSet>(tileSet);
+        Resources::tileSetTable.insert({file, tile});
+        return tile;
+    } else {
+        return temp->second;
+    }
+}
+void Resources::ClearTileSets() {
+    for(auto it = Resources::tileSetTable.begin();it != Resources::tileSetTable.end();) {
+        if((*it).second.unique()) {
+            Resources::tileSetTable.erase(it);
+            it = Resources::tileSetTable.begin();
+        } else {
+            it++;
+        }
+
     }
 }

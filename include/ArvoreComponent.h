@@ -20,9 +20,10 @@ private:
     Sprite* idle;
     Sprite* atual;
     GameObject* brilhoChao;
+    GameObject* wisp;
     bool ligaRender;
     Timer timer;
-    GameObject* wisp;
+    Timer timer2;
 
 };
 

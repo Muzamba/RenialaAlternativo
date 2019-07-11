@@ -112,6 +112,7 @@ void Game::Run() {
             Resources::ClearMusics();
             Resources::ClearSounds();
             Resources::ClearFonts();
+            Resources::ClearTileSets();
             if(stateStack.empty()) {
                 if(!storedState) {
                     break;
@@ -153,6 +154,7 @@ void Game::Run() {
     Resources::ClearMusics();
     Resources::ClearSounds();
     Resources::ClearFonts();
+    Resources::ClearTileSets();
     
 }
 
