@@ -34,7 +34,7 @@ void Text::Render() {
     dstRect.y = associated.box.pos.y - Camera::pos.y;
     dstRect.w = associated.box.size.x;
     dstRect.h = associated.box.size.y;
-
+	std::cout << associated.box.pos.x << " " << associated.box.pos.y << " " << associated.box.size.x << " " << associated.box.size.y << std::endl;
     SDL_RenderCopyEx(Game::GetInstance().GetRenderer(), texture, &clipRect, &dstRect, associated.anlgleDeg, nullptr, SDL_FLIP_NONE);
 }
 

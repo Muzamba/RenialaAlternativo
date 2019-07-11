@@ -5,7 +5,7 @@
 #include <crtdbg.h>
 #endif
 #include "TestState.h"
-#include "InicialState.h"
+#include "MenuState.h"
 #include <time.h>
 
 
@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
 	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);//Isso aqui serve para checar memory leaks dentro do VSCommunity
 	#endif
 	srand(time(NULL));
-	Game::GetInstance().Push(new InicialState());
+	Game::GetInstance().Push(new MenuState());
 	Game::GetInstance().Run();
 	return 0;
 }

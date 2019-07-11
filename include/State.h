@@ -24,6 +24,7 @@ public:
     bool PopRequested();
     bool QuitRequested();
 
+	std::string nameState;
 protected:
     virtual void StartArray();
     virtual void UpdateArray(float dt);

@@ -18,7 +18,8 @@
 #include "Wisp.h"
 
 TestState::TestState() : State() {
-
+	nameState = "TestState";
+	GameData::state = this;
 }
 
 void TestState::LoadAssets() {
@@ -74,8 +75,8 @@ void TestState::LoadAssets() {
 
 	GameObject* goplayer = new GameObject();
 	Player* player = new Player(*goplayer);
-	goplayer->box.pos.x = 11000;//300;
-	goplayer->box.pos.y = 300;
+	goplayer->box.pos.x = 100;//300;
+	goplayer->box.pos.y = 0;
 	Camera::Fallow(goplayer);
 	auto p = AddObject(goplayer);
 	Game::GetInstance().playerStatus.player = p;
