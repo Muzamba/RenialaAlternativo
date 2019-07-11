@@ -31,11 +31,11 @@ void Wisp::Update(float dt) {
             first = false;
         }  
         dir = dir.normalizado();
-
-        if(abs(associated.box.pos.x - posDest.x) > 20 && abs(associated.box.pos.y - posDest.y) > 20 ) {
-             associated.box.pos = associated.box.pos + dir * velo * dt;
+        auto opa = dir * velo * dt;
+        if( sqrt(pow(abs(associated.box.centro().x - posDest.x),2) + pow(abs(associated.box.centro().y - posDest.y),2)) > opa.magnitude()) {
+             associated.box.mudaCentro(associated.box.centro() + opa);
         } else {
-            associated.box.pos = posDest;
+            associated.box.mudaCentro(posDest);
             animacao = false;
         }
         

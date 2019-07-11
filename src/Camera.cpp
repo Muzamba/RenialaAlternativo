@@ -4,6 +4,7 @@
 Vec2 Camera::pos = Vec2();
 Vec2 Camera::speed = Vec2();
 GameObject* Camera::focus = nullptr;
+Camera::FASE Camera::fase = Camera::ARVORE;
 
 
 void Camera::Fallow(GameObject* newFocus) {
@@ -15,18 +16,49 @@ void Camera::Unfollow() {
 }
 
 void Camera::Update(float dt) {
-
+    float xMax,xMin;
+    float yMax, yMin;
     if(focus != nullptr) {
         float auxX = focus->box.centro().x - 1280 / 2.0f;
         float auxY = focus->box.centro().y - 720 / 2.0f;
+        switch (fase){
+            case ARVORE:
+                xMax = 128;
+                xMin = 0;
+                yMax = 0;
+                yMin = 0;
+                break;
 
-        if(auxX < 0) {
-            auxX = 0;
-        } else if( auxX > 10000) {
-            auxX = 10000;
+            case TRANSICAO:
+                xMax = 0;
+                xMin = 0;
+                yMax = 0;
+                yMin = 0;
+                break;
+
+            case BONITA:
+                xMax = 10000;
+                xMin = 0;
+                yMax = 0;
+                yMin = -1000;
+                break;
+
+            case FEIA:
+                break;
+
+            case CAVERNA:
+                break;
+
         }
-        if(auxY > 0) {
-            auxY = 0;
+        if(auxX < xMin) {
+            auxX = xMin;
+        } else if( auxX > xMax) {
+            auxX = xMax;
+        }
+        if(auxY < yMin) {
+            auxY = yMin;
+        } else if(auxY > yMax){
+            auxY = yMax;
         }
         
         pos.x = auxX;
@@ -50,4 +82,8 @@ void Camera::Update(float dt) {
         pos = pos + (speed * dt);
         speed = speed * 0;
     }
+}
+
+void Camera::SetFase(FASE fase) {
+    Camera::fase = fase;
 }

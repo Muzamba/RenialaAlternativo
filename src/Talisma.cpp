@@ -14,8 +14,8 @@
 #include "Player.h"
 #include "Sound.h"
 
-Talisma::Talisma(GameObject& associated, std::string textfile, std::string imgfileInGame, std::string imgfileNoAnim, std::string imgfileHUD, int indice) : Component(associated) {
-    
+Talisma::Talisma(GameObject& associated, std::string textfile, std::string imgfileInGame, std::string imgfileNoAnim, std::string imgfileHUD, Camera::FASE fase, int indice) : Component(associated) {
+    this->fase = fase;
     //this->talismaFile = imgfile;
     spriTable["Animated"] = new Sprite(associated, imgfileInGame, 0, 0, 0.1f, 5);
     spriTable["NotAnimated"] = new Sprite(associated, imgfileNoAnim);
@@ -50,12 +50,18 @@ Talisma::Talisma(GameObject& associated, std::string textfile, std::string imgfi
 }
 
 void Talisma::Update(float dt) {
-    timer.Update(dt);
-    atual->Update(dt);
+    if(!coletado && Camera::fase != fase){
+    } else {
+        atual->Update(dt);
+    }
+    
+
     auto& im = InputManager::GetInstance();
     static Vec2 dir = {0,0};
     static int velo = 0;
+    if(Camera::fase == fase){
     if(!coletado) {
+        timer.Update(dt);
         //timer.Update(dt);
         if(ligaBrilho){
             if(timer.Get() > 0.6f) {
@@ -127,19 +133,23 @@ void Talisma::Update(float dt) {
         mouseY = im.GetMouseY();
         //cliando no item
         if(associated.box.estaDentro(mouseX + Camera::pos.x, mouseY + Camera::pos.y) and im.MouseRelease(SDL_BUTTON_LEFT)) {
-             Game::GetInstance().Push(new BoxState(talismaFile, text));
+             //Game::GetInstance().Push(new BoxState(talismaFile, text));
         }
     //    SDL_GetMouseState(&mouseX, &mouseY);
     //    if(associated.box.Contains(mouseX + Camera::pos.x, mouseY + Camera::pos.y) && (InputManager::GetInstance().IsMouseDown(SDL_BUTTON_RIGHT) || InputManager::GetInstance().IsMouseDown(SDL_BUTTON_LEFT) ) ) { 
     //        Game::GetInstance().Push(new BoxState(this->talismaFile, this->text));   
     //    }
     }
+    }
 }
 
 void Talisma::Render() {
-    atual->Render();
-    if(exibeTexto){
-        texto->Render();
+    if(!coletado && Camera::fase != fase){
+    } else {
+        atual->Render();
+        if(exibeTexto){
+            texto->Render();
+        }
     }
 }
 

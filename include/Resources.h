@@ -10,6 +10,7 @@
 #include <unordered_map>
 #include <memory>
 #include <utility>
+#include "TileSet.h"
 
 
 struct pair_hash {
@@ -39,12 +40,16 @@ public:
     static std::shared_ptr<TTF_Font> GetFont(std::pair<std::string,int> chave);
     static void ClearFonts();
 
+    static std::shared_ptr<TileSet> GetTileSet(std::string file);
+    static void ClearTileSets();
+
 
 private:
     static std::unordered_map<std::string, std::shared_ptr<SDL_Texture>> imageTable;
     static std::unordered_map<std::string, std::shared_ptr<Mix_Music>> musicTable;
     static std::unordered_map<std::string, std::shared_ptr<Mix_Chunk>> soundTable;
     static std::unordered_map<std::pair<std::string,int>, std::shared_ptr<TTF_Font>, pair_hash> fontTable;
+    static std::unordered_map<std::string,std::shared_ptr<TileSet>> tileSetTable;
 };
 
 

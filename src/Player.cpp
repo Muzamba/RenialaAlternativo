@@ -58,16 +58,17 @@ void Player::Update(float dt) {
 	
 	if(pegarItem){
 		atual = spriteMap["item"];
+		static bool one2 = true;
+		if (one2) {
+			one2 = false;
+			soundMap["item"]->Play(1);
+		}
 		if(animacaoItem.Get() < 2.0f){
 			animacaoItem.Update(dt);
 		} else {
 			animacaoItem.Restart();
 			pegarItem = false;
-		}
-		static bool one2 = true;
-		if (one2) {
-			one2 = false;
-			soundMap["item"]->Play(1);
+			one2 = true;
 		}
 		
 	} else {
