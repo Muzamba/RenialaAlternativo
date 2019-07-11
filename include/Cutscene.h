@@ -1,12 +1,12 @@
 #pragma once
 #include "State.h"
 #include "Timer.h"
-#include "Sprite.h"
 #include "FadeIn.h"
 #include "FadeOut.h"
+#include "Music.h"
 class Cutscene : public State {
 public:
-	Cutscene();
+	Cutscene(bool inicial=true);
 	
 	void Update(float dt) override;
 	void Render() override;
@@ -17,6 +17,8 @@ public:
 	
 	void LoadAssets();
 private:
+	bool inicial;
+
 	Timer timer;
 
 	GameObject *cena1obj;
@@ -25,13 +27,11 @@ private:
 	GameObject *cena4obj;
 	GameObject *cena5obj;
 
-	//GameObject *fadeInObj;
-
 	bool renderNewScene;
-	bool showFadeOut;
 	int scene;
 
 	FadeIn* fadeIn;
 	FadeOut* fadeOut;
 
+	Music* musica;
 };
