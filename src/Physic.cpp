@@ -24,7 +24,7 @@ void Physic::Update(float dt) {
             if (!player->pegarItem and !player->dialogo) {
             if (im.IsKeyDown(D_KEY) or im.IsKeyDown(A_KEY) or im.KeyPress(W_KEY)) {
 		        if(im.IsKeyDown(D_KEY) or im.IsKeyDown(A_KEY)) {
-                    float velo = 200;
+                    float velo = 300;
                     if (im.IsKeyDown(D_KEY)) {
 			            associated.box.pos.x = associated.box.pos.x + velo * dt;
                         dirMovimentoX = 1;
@@ -106,9 +106,9 @@ void Physic::NotifyCollision(GameObject& other) {
                             
                         }
                   } else {
-                        if(dirMovimentoX == -1 and (collider2->box.estaDentro(pontoEI.first, pontoEI.second) or collider2->box.estaDentro(pontoES.first, pontoES.second))) {
+                        if(dirMovimentoX == -1 ){//and (collider2->box.estaDentro(pontoEI.first, pontoEI.second) or collider2->box.estaDentro(pontoES.first, pontoES.second))) {
                             colDir = {-1, 0};
-                        } else if(dirMovimentoX == 1  and (collider2->box.estaDentro(pontoDI.first, pontoDI.second) or collider2->box.estaDentro(pontoDS.first, pontoDS.second))) {
+                        } else if(dirMovimentoX == 1){//  and (collider2->box.estaDentro(pontoDI.first, pontoDI.second) or collider2->box.estaDentro(pontoDS.first, pontoDS.second))) {
                             colDir = {1, 0};
                         } else {
 
@@ -176,14 +176,14 @@ void Physic::NotifyCollision(GameObject& other) {
                     
                     float distDoEsq = sqrt(pow(collider->box.centro().x - collider2->box.pos.x, 2) + pow(collider->box.centro().y - (collider2->box.pos.y + collider2->box.size.y), 2));
                     float distDoDir = sqrt(pow(collider->box.centro().x - (collider2->box.pos.x + collider2->box.size.x), 2) + pow(collider->box.centro().y - (collider2->box.pos.y + collider2->box.size.y), 2));
-                    if(colDir.first == 1 and (distToEsq < distToDir and distDoEsq < distDoDir)) {
+                    if(/*colDir.first == 1 and  */(distToEsq < distToDir and distDoEsq < distDoDir)) {
                         if(dirMovimentoX == 1) {
                             associated.box.pos.x = collider2->box.pos.x - collider->box.size.x - valorX + 2;
                         }
                     }
-                    if(colDir.first == -1 and (distToEsq > distToDir and distDoEsq > distDoDir)) {
+                    if(/* colDir.first == -1 and */(distToEsq > distToDir and distDoEsq > distDoDir)) {
                         if(dirMovimentoX == -1) {
-                            associated.box.pos.x = collider->box.pos.x - valorX ; //+3
+                            associated.box.pos.x = collider2->box.pos.x + collider2->box.size.x - valorX ; //+3
                         }
                     }
                     

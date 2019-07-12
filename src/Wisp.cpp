@@ -2,6 +2,8 @@
 #include "Sprite.h"
 #include "InputManager.h"
 #include "Collider.h"
+#include "Game.h"
+#include "Dialogo.h"
 
 Wisp::Wisp(GameObject& associated, std::weak_ptr<GameObject> player, bool fase2) : Component(associated) {
     associated.AddComponent(this);
@@ -10,7 +12,9 @@ Wisp::Wisp(GameObject& associated, std::weak_ptr<GameObject> player, bool fase2)
     sprite->SetScale(1.1f, 1.1f);
     associated.AddComponent(sprite);
     luz = new GameObject();
-    luz->AddComponent(new Sprite(*luz, "assets/img/BlackWithHole.png"));
+    auto sp2 = new Sprite(*luz, "assets/img/BlackWithHole.png");
+    sp2->SetScale(1.5,1.5);
+    luz->AddComponent(sp2);
 //
     associated.box.pos = {player.lock()->box.centro().x - associated.box.size.x/2, - associated.box.size.y};
     this->player = player;
@@ -37,6 +41,7 @@ void Wisp::Update(float dt) {
         } else {
             associated.box.mudaCentro(posDest);
             animacao = false;
+            ((Dialogo*)Game::GetInstance().playerStatus.dialogo->GetComponent("Dialogo"))->Begin("Ei espera ai!!! Vou te ajudar a encontrar os talismas", "wisp");
         }
         
     } else {
@@ -75,13 +80,27 @@ void Wisp::Update(float dt) {
         if(fase2) {
             auto sprite = (Sprite*)luz->GetComponent("Sprite");
             static int alpha = 0;
-            float val = abs((goP->box.pos.y - 548) / 1280);
+            static float radius;
+            float val = ((abs(goP->box.pos.y) - 3008) / 4000);//6496);
 
-            if(val < 1) {
+            if(val < 0) {
+                alpha = 255;
+                radius = 1.5;
+            }else if(val > 1) {
+                alpha = 0;
+                radius = 10;// * (1-val);
+                
+            } else {
+                radius = 10 * val;
                 val = 1 - val;
                 alpha = val * 255;
+                if(radius < 1.5f){
+                    radius = 1.5f;
+                }
+                
             }
             sprite->SetAlphaChannel(alpha);
+            sprite->SetScale(radius, radius);
         }
 
         if(goP) {

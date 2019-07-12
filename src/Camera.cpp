@@ -47,6 +47,11 @@ void Camera::Update(float dt) {
                 break;
 
             case CAVERNA:
+                xMax = 1280;
+                xMin = 0;
+                yMax = -32 * 16;
+                yMin = -7008;
+
                 break;
 
         }

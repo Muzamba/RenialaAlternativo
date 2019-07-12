@@ -110,7 +110,7 @@ void Talisma::Update(float dt) {
                     //Game::GetInstance().Push(new BoxState(talismaFile, text));
                 }
             } else if(animacao) {
-                if(associated.box.pos.x - (90 + 44 * indice) > 10 and associated.box.pos.y - 25 > 10) {
+                if(associated.box.pos.x - Camera::pos.x - (90 + 44 * indice) > 10 and associated.box.pos.y - Camera::pos.y - 25 > 10) {
                     
                     associated.box.pos = associated.box.pos + dir * velo * dt; 
                 } else {
