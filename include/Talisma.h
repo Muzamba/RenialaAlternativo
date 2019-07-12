@@ -20,10 +20,11 @@ public:
 	bool Is(std::string type) override;
     bool talismaAdicionado;
     Camera::FASE fase;
+    bool coletado;
+    bool animacao;
 
 private:
     int mouseX, mouseY;
-    bool coletado;
     std::string talismaFile;
     //Sprite *talismaInGame;
     //Sprite *talismaNoAnim;
@@ -38,7 +39,6 @@ private:
     int indice;
     Timer timer;
     bool ligaBrilho;
-    bool animacao;
     Sound* sound;
 };
 

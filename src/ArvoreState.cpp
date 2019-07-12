@@ -73,13 +73,14 @@ void ArvoreState::LoadAssets() {
         GameObject* goplayer = new GameObject();
 	    Player* player = new Player(*goplayer);
 	    goplayer->box.pos.x = 0;//300;
-	    goplayer->box.pos.y = 0;
+	    goplayer->box.pos.y = 530;
 	    Camera::Fallow(goplayer);
 	    Game::GetInstance().playerStatus.player = AddObject(goplayer).lock();
 
         GameObject* goDia = new GameObject();
         new Dialogo(*goDia);
         Game::GetInstance().playerStatus.dialogo = AddObject(goDia).lock();
+        
 
         GameObject* goHUD = new GameObject();
         new HUD(*goHUD);
@@ -93,8 +94,8 @@ void ArvoreState::LoadAssets() {
         
         GameObject* talismaFlor = new GameObject();
 		Talisma *talisma2 = new Talisma(*talismaFlor, "assets/text/talisma2.txt", "assets/img/talismans/talisma_flor(1).png","assets/img/talismans/talisma_flor.png","assets/img/talismans/flor.png", Camera::CAVERNA, 1);
-		talismaFlor->box.pos.x = 0;//definir posicao do talisma na fase correspondente
-		talismaFlor->box.pos.y = 0 ;//
+		talismaFlor->box.pos.x = 40 * 32;//definir posicao do talisma na fase correspondente
+		talismaFlor->box.pos.y = -7008 + 32 * 218;//
 		((HUD*)Game::GetInstance().playerStatus.hud->GetComponent("HUD"))->AddTalisma(talismaFlor);
 
         GameObject* talismaPedra = new GameObject();
@@ -140,8 +141,9 @@ void ArvoreState::LoadAssets() {
 void ArvoreState::Update(float dt) {
     Camera::Update(dt);
     UpdateArray(dt);
+    
     static bool first = true;
-    if(Game::GetInstance().playerStatus.player->box.centro().x > 640 && first) {
+    if(Game::GetInstance().playerStatus.player->box.centro().x > 340 && first) {
         musica->Play();
         first = false;
     }
@@ -199,7 +201,7 @@ void ArvoreState::Update(float dt) {
         if(first) {
             ((FadeOut*)fadeOut->GetComponent("FadeOut"))->Begin();
             first = false;
-            musica->Stop(0.25f);
+            musica->Stop(250);
         }
         if( ((FadeOut*)fadeOut->GetComponent("FadeOut"))->timer.Get() > 0.25f){
             popRequested = true;
@@ -216,6 +218,12 @@ void ArvoreState::Update(float dt) {
     
         fadeIn->Update(dt);
         fadeOut->Update(dt);
+
+    static bool one = true;
+    if(one){
+        ((Dialogo*)Game::GetInstance().playerStatus.dialogo->GetComponent("Dialogo"))->Begin("Use as teclas WASD para andar e barra de espaco para pular dialogos", "boneco");
+        one = false;
+    }
 }
 
 

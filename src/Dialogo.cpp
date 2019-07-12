@@ -43,7 +43,7 @@ Dialogo::Dialogo(GameObject& associated) : Component(associated) {
 
     texto = new GameObject();
     texto->AddComponent(new CameraFollower(*texto, 150, 645));
-    texto->AddComponent(new Text(*texto, "assets/font/herculanum.ttf", 20, Text::BLENDED, "", {0,0,0,255}));
+    texto->AddComponent(new Text(*texto, "assets/font/PixelFont.otf", 25, Text::BLENDED, "", {0,0,0,255}));
     //texto->box.pos = {150, 645};
 
     piscaButton = false;
@@ -58,7 +58,7 @@ Dialogo::~Dialogo() {
 void Dialogo::Update(float dt) {
     texto->Update(dt);
     if(on){
-        if(timer.Get() < 0.47f){
+        if(timer.Get() < 0.45f){
             box->Update(dt);
             timer.Update(dt);
         } else {
@@ -87,7 +87,7 @@ void Dialogo::Update(float dt) {
 void Dialogo::Render() {
     if(on){
         box->Render();
-        if(timer.Get() > 0.46f ){
+        if(timer.Get() > 0.44f ){
             faceTable[quem]->Render();
             texto->Render();
             if(piscaButton){
@@ -107,4 +107,5 @@ void Dialogo::Begin(std::string text, std::string quem) {
     on = true;
     ((Text*)texto->GetComponent("Text"))->SetText(text);
     ((Player*)Game::GetInstance().playerStatus.player->GetComponent("Player"))->dialogo = true;
+    ((Sprite*)box->GetComponent("Sprite"))->SetFrame(0);
 }

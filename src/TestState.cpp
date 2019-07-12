@@ -325,14 +325,14 @@ void TestState::Update(float dt) {
 		if(first){
 			((FadeOut*)fadeOut->GetComponent("FadeOut"))->Begin();
 			first = false;
-			musica->Stop(0.25f);
+			musica->Stop(250);
 		}
 		
 	} else if(Game::GetInstance().playerStatus.player->box.centro().x < -20){
 		if(first){
 			((FadeOut*)fadeOut->GetComponent("FadeOut"))->Begin();
 			first = false;
-			musica->Stop(0.25f);
+			musica->Stop(250);
 		}
 	}
 	if(Game::GetInstance().playerStatus.player->box.pos.y > 720) {
@@ -374,7 +374,13 @@ void TestState::Update(float dt) {
         }
 
     }
-	
+	{
+	static bool first = true;
+    if (first){
+        ((Dialogo*)Game::GetInstance().playerStatus.dialogo->GetComponent("Dialogo"))->Begin("Uau que lugar bonito >.<", "boneco");
+        first = false;
+    }
+	}
 }
 
 void TestState::Render() {

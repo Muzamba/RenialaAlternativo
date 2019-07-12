@@ -47,6 +47,7 @@ void ArvoreComponent::Update(float dt) {
         atual = idle;
         atual->Update(dt);
     }
+        static bool second = true;
     if(ligaRender){
         atual->Update(dt);
         if(timer.Get() < 1.58333f) {
@@ -59,7 +60,6 @@ void ArvoreComponent::Update(float dt) {
             } else {
                 static bool first = true;
                 if(first) {
-                    ((Dialogo*)Game::GetInstance().playerStatus.dialogo->GetComponent("Dialogo"))->Begin("aaaaaaaaaaaAAAAAAAAAAaaaaaaaaaaaaaaaa", "arvore");
                     first = false;
                 }
             }
@@ -67,11 +67,16 @@ void ArvoreComponent::Update(float dt) {
     }
 
     if (first) {
-        if(Game::GetInstance().playerStatus.player->box.centro().x > 640) {
+        if(Game::GetInstance().playerStatus.player->box.centro().x > 340 and second){
             ligaRender = true;
+            second = false;
+            ((Dialogo*)Game::GetInstance().playerStatus.dialogo->GetComponent("Dialogo"))->Begin("Socoooorrro!!! Preciso dos tres talismas para continuar vivendo", "arvore");
+                    
+            Game::GetInstance().GetCurrentState().AddObject(brilhoChao);
+        }
+        if(Game::GetInstance().playerStatus.player->box.centro().x > 640) {
             first = false;
             //musica->Play();
-            Game::GetInstance().GetCurrentState().AddObject(brilhoChao);
             //((Dialogo*)Game::GetInstance().playerStatus.player.lock()->GetComponent("Dialogo"))->Begin("oi", "arvore");
             //((Dialogo*)Game::GetInstance().playerStatus.dialogo->GetComponent("Dialogo"))->Begin("Bom dia grupo", "wisp");
             //auto go = new GameObject();
