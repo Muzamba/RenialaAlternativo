@@ -26,8 +26,8 @@ Talisma::Talisma(GameObject& associated, std::string textfile, std::string imgfi
 
     atual = spriTable["NotAnimated"];
     texto = new GameObject();
-    texto->AddComponent(new Text(*texto, "assets/font/herculanum.ttf", 15, Text::BLENDED, "precione (x) para coletar", {0,0,0,255}));
-    texto->box.pos = associated.box.pos;
+    texto->AddComponent(new Text(*texto, "assets/font/PixelFont.otf", 15, Text::BLENDED, "precione (x) para coletar", {0,0,0,255}));
+    texto->box.pos = {associated.box.pos.x,associated.box.pos.y};
     ReadText(textfile); 
     associated.box.size.x = atual->GetWidth();
     associated.box.size.y = atual->GetHeight();
@@ -36,8 +36,8 @@ Talisma::Talisma(GameObject& associated, std::string textfile, std::string imgfi
     coletado = false;
     talismaAdicionado = false;
     rangeText.pos = associated.box.pos;
-    rangeText.size.x = 200;
-    rangeText.size.y = 200;
+    rangeText.size.x = 125;
+    rangeText.size.y = 125;
     exibeTexto = false;
     this->indice = indice;
     timer.Restart();
@@ -78,14 +78,15 @@ void Talisma::Update(float dt) {
             }
         }
 
-        texto->box.mudaCentro({associated.box.centro().x, associated.box.centro().y - associated.box.size.y/2 - texto->box.size.y});
-        rangeText.pos.x = associated.box.pos.x - 100;
-        rangeText.pos.y = associated.box.pos.y - 100;
+        texto->box.mudaCentro({associated.box.centro().x + 20, associated.box.centro().y - associated.box.size.y/2 - texto->box.size.y/2});
+        //rangeText.pos.x = associated.box.pos.x - 75;
+        //rangeText.pos.y = associated.box.pos.y - 75;
+        rangeText.mudaCentro({associated.box.centro().x + 10, associated.box.centro().y + 25});
         
         auto player = Game::GetInstance().playerStatus.player;
         if(player) {
             auto centro = player->box.centro();
-            auto cameraFo = (CameraFollower*)associated.GetComponent("CameraFollower");
+            //auto cameraFo = (CameraFollower*)associated.GetComponent("CameraFollower");
             if(rangeText.estaDentro(centro.x, centro.y) and !animacao) {
                 exibeTexto = true;
                 if(im.KeyPress(SDLK_x)) {

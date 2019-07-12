@@ -27,11 +27,14 @@ TestState::TestState() : State() {
 
 	Camera::pos = {0,0};
 	Camera::SetFase(Camera::BONITA);
+	musica = new Music("assets/sound/Reniala-fase-1-_64bpm_.ogg");
+	musica->Play();
 }
 
 TestState::~TestState() {
 	delete fadeIn;
 	delete fadeOut;
+	delete musica;
 }
 
 void TestState::LoadAssets() {
@@ -322,12 +325,14 @@ void TestState::Update(float dt) {
 		if(first){
 			((FadeOut*)fadeOut->GetComponent("FadeOut"))->Begin();
 			first = false;
+			musica->Stop(0.25f);
 		}
 		
 	} else if(Game::GetInstance().playerStatus.player->box.centro().x < -20){
 		if(first){
 			((FadeOut*)fadeOut->GetComponent("FadeOut"))->Begin();
 			first = false;
+			musica->Stop(0.25f);
 		}
 	}
 	if(Game::GetInstance().playerStatus.player->box.pos.y > 720) {

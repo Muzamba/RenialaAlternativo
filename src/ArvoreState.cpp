@@ -39,6 +39,7 @@ ArvoreState::~ArvoreState() {
     //delete arvore;
     delete fadeOut;
     delete fadeIn;
+    delete musica;
 }
     
 
@@ -66,6 +67,7 @@ void ArvoreState::LoadAssets() {
 	goPlat->box.pos.x = 0;
 	AddObject(goPlat);
 
+     musica = new Music("assets/sound/Reniala-fase-final-_95bpm_.ogg");
 
     if(Game::GetInstance().playerStatus.criarVariaveis) {
         GameObject* goplayer = new GameObject();
@@ -101,10 +103,12 @@ void ArvoreState::LoadAssets() {
 		talismaPedra->box.pos.y = 0 ;//
 		((HUD*)Game::GetInstance().playerStatus.hud->GetComponent("HUD"))->AddTalisma(talismaPedra);
 
+
     } else {
         //Game::GetInstance().playerStatus.player = AddObject(Game::GetInstance().playerStatus.player.get()).lock();
         Game::GetInstance().playerStatus.player->box.pos = {1280 + 32, 720};
         ((Gravidade*)Game::GetInstance().playerStatus.player->GetComponent("Gravidade"))->SetVelocidade(-670);
+        musica->Play();
     }
 
 	//GameObject* goWisp = new GameObject();
@@ -125,7 +129,7 @@ void ArvoreState::LoadAssets() {
     limiteDir->box.pos = {44* 32, 0} ;
     AddObject(limiteDir); 
 
-    
+   
 
 
     
@@ -136,6 +140,11 @@ void ArvoreState::LoadAssets() {
 void ArvoreState::Update(float dt) {
     Camera::Update(dt);
     UpdateArray(dt);
+    static bool first = true;
+    if(Game::GetInstance().playerStatus.player->box.centro().x > 640 && first) {
+        musica->Play();
+        first = false;
+    }
 
     if(!Game::GetInstance().playerStatus.criarVariaveis) {
         auto& playerStatus = Game::GetInstance().playerStatus;
@@ -190,6 +199,7 @@ void ArvoreState::Update(float dt) {
         if(first) {
             ((FadeOut*)fadeOut->GetComponent("FadeOut"))->Begin();
             first = false;
+            musica->Stop(0.25f);
         }
         if( ((FadeOut*)fadeOut->GetComponent("FadeOut"))->timer.Get() > 0.25f){
             popRequested = true;

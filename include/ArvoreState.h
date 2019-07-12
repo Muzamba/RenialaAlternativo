@@ -3,6 +3,7 @@
 
 #include "State.h"
 #include "Timer.h"
+#include "Music.h"
 
 
 class ArvoreState : public State {
@@ -23,6 +24,7 @@ private:
     GameObject* fadeOut;
     GameObject* fadeIn;
     Timer timerFade;
+    Music* musica;
 
 };
 

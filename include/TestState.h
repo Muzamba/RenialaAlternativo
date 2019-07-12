@@ -1,5 +1,6 @@
 #pragma once
 #include "State.h"
+#include "Music.h"
 class TestState : public State {
 public:
 	TestState();
@@ -20,6 +21,7 @@ public:
 private:
 	GameObject* fadeIn;
 	GameObject* fadeOut;
+	Music* musica;
 
 };
 

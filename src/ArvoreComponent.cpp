@@ -7,9 +7,9 @@
 
 ArvoreComponent::ArvoreComponent(GameObject& associated) : Component(associated) {
     associated.AddComponent(this);
-    ascendendo = new Sprite(associated, "assets/img/Arvore/arvore_acendendo.png", 0, 0, 0.1f, 12);
+    ascendendo = new Sprite(associated, "assets/img/Arvore/arvore_acendendo.png", 0, 0, 0.131944444f, 12);
     ascendendo->SetScale(3, 3);
-    idle = new Sprite(associated, "assets/img/Arvore/arvore_idle.png", 0, 0, 0.15f, 8);
+    idle = new Sprite(associated, "assets/img/Arvore/arvore_idle.png", 0, 0, 0.19791666f, 8);//0.098958333, 8);
     idle->SetScale(3, 3);
     atual = ascendendo;
     ligaRender = false;
@@ -19,18 +19,20 @@ ArvoreComponent::ArvoreComponent(GameObject& associated) : Component(associated)
     brilhoChao = new GameObject();
     auto brilho = new Sprite(*brilhoChao, "assets/img/cenarioArvore/brilhochão.png");
     brilhoChao->AddComponent(brilho);
-    brilho->SetScale(2.872,12);
+    brilho->SetScale(3.8,12);
     brilhoChao->box.pos = {-10.0f, 624 - brilhoChao->box.size.y/2};
 
     timer2.Restart();
 
-    
+    //musica = new Music("assets/sound/Reniala-fase-final-_95bpm_.ogg");
 
 }
 
 ArvoreComponent::~ArvoreComponent() {
     delete ascendendo;
     delete idle;
+    //musica->Stop(0);
+    //delete musica;
     //delete brilhoChao;
     //delete wisp;
 }
@@ -47,12 +49,12 @@ void ArvoreComponent::Update(float dt) {
     }
     if(ligaRender){
         atual->Update(dt);
-        if(timer.Get() < 1.2f) {
+        if(timer.Get() < 1.58333f) {
             timer.Update(dt);
             
         } else {
             atual = idle;
-            if(timer2.Get() < 2.0f) {
+            if(timer2.Get() < 1.0f) {
                 timer2.Update(dt);
             } else {
                 static bool first = true;
@@ -68,6 +70,7 @@ void ArvoreComponent::Update(float dt) {
         if(Game::GetInstance().playerStatus.player->box.centro().x > 640) {
             ligaRender = true;
             first = false;
+            //musica->Play();
             Game::GetInstance().GetCurrentState().AddObject(brilhoChao);
             //((Dialogo*)Game::GetInstance().playerStatus.player.lock()->GetComponent("Dialogo"))->Begin("oi", "arvore");
             //((Dialogo*)Game::GetInstance().playerStatus.dialogo->GetComponent("Dialogo"))->Begin("Bom dia grupo", "wisp");

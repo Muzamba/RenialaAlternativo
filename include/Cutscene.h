@@ -7,6 +7,7 @@
 class Cutscene : public State {
 public:
 	Cutscene(bool inicial=true);
+	virtual ~Cutscene();
 	
 	void Update(float dt) override;
 	void Render() override;

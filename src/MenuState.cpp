@@ -17,10 +17,11 @@ void MenuState::Update(float dt) {
     textCounter.Update(dt);
     this->UpdateArray(dt);
     fadeOut->Update(dt);
-    if (InputManager::GetInstance().KeyPress(SDLK_SPACE)) {
-        Game::GetInstance().Push(new Cutscene());
+    static bool first = true;
+    if (InputManager::GetInstance().KeyPress(SDLK_SPACE) && first) {
         ((FadeOut*)fadeOut->GetComponent("FadeOut"))->Begin();
         musica->Stop();
+        first = false;
     }
     if (textCounter.Get() > 1.2) {
         mostrarTexto = !mostrarTexto;
@@ -28,7 +29,8 @@ void MenuState::Update(float dt) {
     }
     if(((FadeOut*)fadeOut->GetComponent("FadeOut"))->timer.Get() > 1.5f) {
         popRequested = true;
-        Game::GetInstance().Push(new ArvoreState());
+        Game::GetInstance().Push(new  Cutscene());
+        first = true;
     }
 }
 
@@ -72,7 +74,7 @@ void MenuState::LoadAssets() {
     texto->box.pos = {centro.x + (350/2), centro.y + 10};
     texto->AddComponent(textoFonte);
 
-    musica = new Music("assets/sound/TRILHA SONORA.ogg");
+    musica = new Music("assets/sound/Menu.ogg");
     musica->Play();
 
     fadeOut = new GameObject();

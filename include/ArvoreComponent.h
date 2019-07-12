@@ -4,6 +4,7 @@
 #include "Component.h"
 #include "Sprite.h"
 #include "Timer.h"
+#include "Music.h"
 
 class ArvoreComponent : public Component {
 public:
@@ -24,6 +25,7 @@ private:
     bool ligaRender;
     Timer timer;
     Timer timer2;
+    Music* musica;
 
 };
 
