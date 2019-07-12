@@ -35,6 +35,7 @@ TestState::~TestState() {
 	delete fadeIn;
 	delete fadeOut;
 	delete musica;
+	frontArray.clear();
 }
 
 void TestState::LoadAssets() {
@@ -312,6 +313,10 @@ void TestState::Update(float dt) {
 	playerStatus.hud->Update(dt);
 	playerStatus.dialogo->Update(dt);
 
+	for(auto& obj : frontArray) {
+		obj->Update(dt);
+	}
+
 	static bool first = true;
 	if(((FadeOut*)fadeOut->GetComponent("FadeOut"))->timer.Get() > 0.25) {
 		popRequested = true;
@@ -390,6 +395,9 @@ void TestState::Render() {
 	playerStatus.wisp->Render();
 	playerStatus.hud->Render();
 	playerStatus.dialogo->Render();
+	for(auto& obj : frontArray){
+		obj->Render();
+	}
 	fadeIn->Render();
 	fadeOut->Render();
 }
@@ -646,28 +654,28 @@ void TestState::LoadCenarioFrente() {
 	flor1->SetScale(2.1f, 2.5f);
 	flor1Obj->AddComponent(flor1);
 	flor1Obj->box.pos = {50, 645};
-	AddObject(flor1Obj); //colocar paralax
+	frontArray.emplace_back(flor1Obj); //colocar paralax
 
 	GameObject *flor2Obj = new GameObject();
 	Sprite *flor2 = new Sprite(*flor2Obj, "assets/img/cenario1/flor7.png");
 	flor2->SetScale(2.1f, 2.5f);
 	flor2Obj->AddComponent(flor2);
 	flor2Obj->box.pos = {30, 690};
-	AddObject(flor2Obj); //colocar paralax
+	frontArray.emplace_back(flor2Obj); //colocar paralax
 
 	GameObject *flor3Obj = new GameObject();
 	Sprite *flor3 = new Sprite(*flor3Obj, "assets/img/cenario1/flor7.png");
 	flor3->SetScale(2.1f, 2.5f);
 	flor3Obj->AddComponent(flor3);
 	flor3Obj->box.pos = {80, 690};
-	AddObject(flor3Obj); //colocar paralax
+	frontArray.emplace_back(flor3Obj); //colocar paralax
 
 	GameObject *flor4Obj = new GameObject();
 	Sprite *flor4 = new Sprite(*flor4Obj, "assets/img/cenario1/flor6.png");
 	flor4->SetScale(2.1f, 2.5f);
 	flor4Obj->AddComponent(flor4);
 	flor4Obj->box.pos = {100, 670};
-	AddObject(flor4Obj); //colocar paralax
+	frontArray.emplace_back(flor4Obj); //colocar paralax
 
 	/*2 plataforma*/
 	GameObject *flor5Obj = new GameObject();
@@ -675,7 +683,7 @@ void TestState::LoadCenarioFrente() {
 	//flor5->SetScale(2.1f, 2.5f);
 	flor5Obj->AddComponent(flor5);
 	flor5Obj->box.pos = {930, 595};
-	AddObject(flor5Obj); //colocar paralax
+	frontArray.emplace_back(flor5Obj); //colocar paralax
 
 
 	GameObject *grama4Obj = new GameObject();
@@ -683,20 +691,20 @@ void TestState::LoadCenarioFrente() {
 	grama4->SetScale(1.2f, 1.2f);
 	grama4Obj->AddComponent(grama4);
 	grama4Obj->box.pos = {1288, 589};
-	AddObject(grama4Obj);
+	frontArray.emplace_back(grama4Obj);
 
 	GameObject *flor6Obj = new GameObject();
 	Sprite *flor6 = new Sprite(*flor6Obj, "assets/img/cenario1/flor4.png");
 	//flor5->SetScale(2.1f, 2.5f);
 	flor6Obj->AddComponent(flor6);
 	flor6Obj->box.pos = {1350, 605};
-	AddObject(flor6Obj); //colocar paralax
+	frontArray.emplace_back(flor6Obj); //colocar paralax
 
 	GameObject *grama8Obj = new GameObject();
 	Sprite *grama8 = new Sprite(*grama8Obj, "assets/img/cenario1/arbustro2.png");
 	grama8Obj->AddComponent(grama8);
 	grama8Obj->box.pos = {3170, 528};
-	AddObject(grama8Obj);
+	frontArray.emplace_back(grama8Obj);
 }
 
 

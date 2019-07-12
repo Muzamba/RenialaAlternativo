@@ -22,6 +22,7 @@ private:
 	GameObject* fadeIn;
 	GameObject* fadeOut;
 	Music* musica;
+	std::vector<std::shared_ptr<GameObject>> frontArray;
 
 };
 
