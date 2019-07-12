@@ -16,7 +16,7 @@ Plataforma::Plataforma(GameObject& associated, TileSet *tileSet, std::string til
 
     associated.box.size.x = tileSet->GetTileWidth() * tileMap->GetWidth();
     associated.box.size.y = tileSet->GetTileHeight() * tileMap->GetHeight();
-    std::cout << "Width: " << tileSet->GetTileWidth() << " Height: " << tileSet->GetTileHeight() << std::endl;
+    //std::cout << "Width: " << tileSet->GetTileWidth() << " Height: " << tileSet->GetTileHeight() << std::endl;
 
     //associated.AddComponent(tileMap);
     

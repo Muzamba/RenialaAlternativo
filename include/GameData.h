@@ -9,7 +9,7 @@
 
 class GameData {
 public:
-    bool playerVictory = false;
+    bool criarVariaveis = true;
     std::shared_ptr<GameObject> player;
     std::shared_ptr<GameObject> wisp;
     std::shared_ptr<GameObject> hud;

@@ -12,6 +12,20 @@ Cutscene::Cutscene(bool inicial) : State() {
     scene = 1;
 }
 
+Cutscene::~Cutscene() {
+    //delete fadeIn;
+	//delete fadeOut;
+
+    delete cena1obj;
+    delete cena2obj;
+    delete cena3obj;
+    if(inicial) {
+        delete cena4obj;
+        delete cena5obj;
+    }
+    delete musica;
+}
+
 void Cutscene::Update(float dt) {
     this->UpdateArray(dt);
     timer.Update(dt);
@@ -19,6 +33,9 @@ void Cutscene::Update(float dt) {
     if(timer.Get() > 3.0 && first) {
         fadeOut->Begin();
         first = false;
+        if(scene == 5){
+            musica->Stop();
+        }
     }
 
     if(timer.Get() > 4.0) {
@@ -58,7 +75,8 @@ void Cutscene::Render() {
         case 6:
         default:
             Game::GetInstance().Push(new ArvoreState());
-            musica->Stop();
+            popRequested = true;
+            //musica->Stop();
             break;
         }
     } else {
@@ -71,9 +89,12 @@ void Cutscene::Render() {
             cena2obj->Render();
             break;
         case 3:
+            cena3obj->Render();
+            break;
         default:
             Game::GetInstance().Push(new CreditState());
-            musica->Stop();
+            popRequested = true;
+            //musica->Stop();
             break;
         }
     }
@@ -90,12 +111,13 @@ void Cutscene::Resume() {
 void Cutscene::Start() {
     LoadAssets();
 	this->StartArray();
+    fadeIn->Begin();
 }
 
 void Cutscene::LoadAssets() {
     if(inicial) {
         cena1obj = new GameObject();
-        Sprite *scene1 = new Sprite(*cena1obj, "assets/img/cutscene_incial/cena_1.png");
+        Sprite *scene1 = new Sprite(*cena1obj, "assets/img/cutscene_inicial/cena_1.png");
         scene1->SetScale(1.25, 0.9375);
         cena1obj->box.pos = {0, 0};
         cena1obj->AddComponent(scene1);
@@ -126,16 +148,22 @@ void Cutscene::LoadAssets() {
     } 
     else {
         cena1obj = new GameObject();
-        Sprite *scene1 = new Sprite(*cena1obj, "assets/img/cutscene_final/cutscene_final_1.png");
+        Sprite *scene1 = new Sprite(*cena1obj, "assets/img/cutscene_final/cena_1.png");
         scene1->SetScale(1.25, 0.9375);
         cena1obj->box.pos = {0, 0};
         cena1obj->AddComponent(scene1);
 
         cena2obj = new GameObject();
-        Sprite *scene2 = new Sprite(*cena2obj, "assets/img/cutscene_final/cutscene_final_2.png");
+        Sprite *scene2 = new Sprite(*cena2obj, "assets/img/cutscene_final/cena_2.png");
         scene2->SetScale(1.25, 0.9375);
         cena2obj->box.pos = {0, 0};
         cena2obj->AddComponent(scene2);
+
+        cena3obj = new GameObject();
+        Sprite *scene3 = new Sprite(*cena3obj, "assets/img/cutscene_final/cena_3.png");
+        scene3->SetScale(1.25, 0.9375);
+        cena3obj->box.pos = {0, 0};
+        cena3obj->AddComponent(scene3);
     }
 
     musica = new Music("assets/sound/TRILHA SONORA.ogg");

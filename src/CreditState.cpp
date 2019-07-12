@@ -5,7 +5,7 @@
 #include "Game.h"
 #include "Text.h"
 
-CreditState::CreditState() {
+CreditState::CreditState() : State() {
 
 }
 
@@ -13,7 +13,7 @@ void CreditState::Update(float dt) {
     this->UpdateArray(dt);
     timer.Update(dt);
     if(timer.Get() > 10.0) {
-        Game::GetInstance().Push(new TestState());
+        Game::GetInstance().Push(new MenuState());
     }
 }
 
@@ -29,7 +29,7 @@ void CreditState::Start() {
 void CreditState::Pause() {}
 
 void CreditState::Resume() {
-    popRequested = false;
+    //popRequested = false;
 }
 
 void CreditState::LoadAssets() {

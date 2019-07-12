@@ -85,6 +85,6 @@ bool TileMap::Is(std::string type) {
 }
 
 TileMap::~TileMap() {
-    delete tileSet;
+    //delete tileSet;
 }
 

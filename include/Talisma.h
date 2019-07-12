@@ -8,17 +8,18 @@
 #include <unordered_map>
 #include <string>
 #include "Sound.h"
-
+#include "Camera.h"
 
 class Talisma : public Component {
 public:
     //passar os itens como parametro
-    Talisma(GameObject& associated, std::string textfile, std::string imgfileInGame, std::string imgfileNoAnim, std::string imgfileHUD, int indice = 0);
+    Talisma(GameObject& associated, std::string textfile, std::string imgfileInGame, std::string imgfileNoAnim, std::string imgfileHUD, Camera::FASE fase, int indice = 0);
     ~Talisma();
     void Update(float dt) override;
 	void Render() override;
 	bool Is(std::string type) override;
     bool talismaAdicionado;
+    Camera::FASE fase;
 
 private:
     int mouseX, mouseY;
@@ -39,7 +40,6 @@ private:
     bool ligaBrilho;
     bool animacao;
     Sound* sound;
-
 };
 
 #endif

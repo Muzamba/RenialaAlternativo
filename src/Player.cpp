@@ -27,10 +27,9 @@ Player::Player(GameObject& associated) : Component(associated), atual(nullptr), 
 	sprite->SetScale(2, 2);
 	spriteMap["item"] = sprite;
 
-	auto sound = new Sound(associated, "assets/sound/Passos.ogg");
-	soundMap["walk"] = sound;
+	soundMap["walk"] = new Sound(associated, "assets/sound/Passos2.ogg");
 	soundMap["item"] = new Sound(associated,"assets/sound/COLETA DE ITEM.ogg");
-	associated.AddComponent(soundMap["walk"]);
+	//associated.AddComponent(soundMap["walk"]);
 
 
 	associated.AddComponent(new Collider(associated, {1/8.0f, 1/2.8f}, {0,10}));
@@ -58,16 +57,20 @@ void Player::Update(float dt) {
 	
 	if(pegarItem){
 		atual = spriteMap["item"];
+		static bool one2 = true;
+		if (one2) {
+			one2 = false;
+			soundMap["walk"]->Stop();
+			soundMap["item"]->Play(1);
+		}
 		if(animacaoItem.Get() < 2.0f){
 			animacaoItem.Update(dt);
 		} else {
 			animacaoItem.Restart();
 			pegarItem = false;
-		}
-		static bool one2 = true;
-		if (one2) {
-			one2 = false;
-			soundMap["item"]->Play(1);
+			one2 = true;
+			one = true;
+			
 		}
 		
 	} else {

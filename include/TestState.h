@@ -1,8 +1,11 @@
 #pragma once
 #include "State.h"
+#include "Music.h"
 class TestState : public State {
 public:
 	TestState();
+	virtual ~TestState();
+
 	void LoadAssets() override;
 	void LoadPlataformas();
 	void LoadBg();
@@ -16,6 +19,9 @@ public:
 	void Pause() override;
 	void Resume() override;
 private:
+	GameObject* fadeIn;
+	GameObject* fadeOut;
+	Music* musica;
 
 };
 

@@ -28,6 +28,8 @@ private:
     std::string quem;
     std::unordered_map<std::string,Sprite*> faceTable;
     Timer timer;
+    Timer timerButton;
+    bool piscaButton;
 };
 
 

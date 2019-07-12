@@ -14,8 +14,8 @@
 #include "Player.h"
 #include "Sound.h"
 
-Talisma::Talisma(GameObject& associated, std::string textfile, std::string imgfileInGame, std::string imgfileNoAnim, std::string imgfileHUD, int indice) : Component(associated) {
-    
+Talisma::Talisma(GameObject& associated, std::string textfile, std::string imgfileInGame, std::string imgfileNoAnim, std::string imgfileHUD, Camera::FASE fase, int indice) : Component(associated) {
+    this->fase = fase;
     //this->talismaFile = imgfile;
     spriTable["Animated"] = new Sprite(associated, imgfileInGame, 0, 0, 0.1f, 5);
     spriTable["NotAnimated"] = new Sprite(associated, imgfileNoAnim);
@@ -26,8 +26,8 @@ Talisma::Talisma(GameObject& associated, std::string textfile, std::string imgfi
 
     atual = spriTable["NotAnimated"];
     texto = new GameObject();
-    texto->AddComponent(new Text(*texto, "assets/font/herculanum.ttf", 15, Text::BLENDED, "precione (x) para coletar", {0,0,0,255}));
-    texto->box.pos = associated.box.pos;
+    texto->AddComponent(new Text(*texto, "assets/font/PixelFont.otf", 15, Text::BLENDED, "precione (x) para coletar", {0,0,0,255}));
+    texto->box.pos = {associated.box.pos.x,associated.box.pos.y};
     ReadText(textfile); 
     associated.box.size.x = atual->GetWidth();
     associated.box.size.y = atual->GetHeight();
@@ -36,8 +36,8 @@ Talisma::Talisma(GameObject& associated, std::string textfile, std::string imgfi
     coletado = false;
     talismaAdicionado = false;
     rangeText.pos = associated.box.pos;
-    rangeText.size.x = 200;
-    rangeText.size.y = 200;
+    rangeText.size.x = 125;
+    rangeText.size.y = 125;
     exibeTexto = false;
     this->indice = indice;
     timer.Restart();
@@ -50,12 +50,18 @@ Talisma::Talisma(GameObject& associated, std::string textfile, std::string imgfi
 }
 
 void Talisma::Update(float dt) {
-    timer.Update(dt);
-    atual->Update(dt);
+    if(!coletado && Camera::fase != fase){
+    } else {
+        atual->Update(dt);
+    }
+    
+
     auto& im = InputManager::GetInstance();
     static Vec2 dir = {0,0};
     static int velo = 0;
+    if(Camera::fase == fase){
     if(!coletado) {
+        timer.Update(dt);
         //timer.Update(dt);
         if(ligaBrilho){
             if(timer.Get() > 0.6f) {
@@ -72,14 +78,15 @@ void Talisma::Update(float dt) {
             }
         }
 
-        texto->box.mudaCentro({associated.box.centro().x, associated.box.centro().y - associated.box.size.y/2 - texto->box.size.y});
-        rangeText.pos.x = associated.box.pos.x - 100;
-        rangeText.pos.y = associated.box.pos.y - 100;
+        texto->box.mudaCentro({associated.box.centro().x + 20, associated.box.centro().y - associated.box.size.y/2 - texto->box.size.y/2});
+        //rangeText.pos.x = associated.box.pos.x - 75;
+        //rangeText.pos.y = associated.box.pos.y - 75;
+        rangeText.mudaCentro({associated.box.centro().x + 10, associated.box.centro().y + 25});
         
         auto player = Game::GetInstance().playerStatus.player;
         if(player) {
             auto centro = player->box.centro();
-            auto cameraFo = (CameraFollower*)associated.GetComponent("CameraFollower");
+            //auto cameraFo = (CameraFollower*)associated.GetComponent("CameraFollower");
             if(rangeText.estaDentro(centro.x, centro.y) and !animacao) {
                 exibeTexto = true;
                 if(im.KeyPress(SDLK_x)) {
@@ -127,19 +134,23 @@ void Talisma::Update(float dt) {
         mouseY = im.GetMouseY();
         //cliando no item
         if(associated.box.estaDentro(mouseX + Camera::pos.x, mouseY + Camera::pos.y) and im.MouseRelease(SDL_BUTTON_LEFT)) {
-             Game::GetInstance().Push(new BoxState(talismaFile, text));
+             //Game::GetInstance().Push(new BoxState(talismaFile, text));
         }
     //    SDL_GetMouseState(&mouseX, &mouseY);
     //    if(associated.box.Contains(mouseX + Camera::pos.x, mouseY + Camera::pos.y) && (InputManager::GetInstance().IsMouseDown(SDL_BUTTON_RIGHT) || InputManager::GetInstance().IsMouseDown(SDL_BUTTON_LEFT) ) ) { 
     //        Game::GetInstance().Push(new BoxState(this->talismaFile, this->text));   
     //    }
     }
+    }
 }
 
 void Talisma::Render() {
-    atual->Render();
-    if(exibeTexto){
-        texto->Render();
+    if(!coletado && Camera::fase != fase){
+    } else {
+        atual->Render();
+        if(exibeTexto){
+            texto->Render();
+        }
     }
 }
 
