@@ -19,6 +19,7 @@ void MenuState::Update(float dt) {
     fadeOut->Update(dt);
     if (InputManager::GetInstance().KeyPress(SDLK_SPACE)) {
         Game::GetInstance().Push(new Cutscene());
+        //Game::GetInstance().Push(new TestState());
         ((FadeOut*)fadeOut->GetComponent("FadeOut"))->Begin();
         musica->Stop();
     }

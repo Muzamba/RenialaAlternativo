@@ -364,11 +364,298 @@ void TestState::Start() {
 }
 
 void TestState::LoadCenarioAtras() {
+	/*1 plataforma*/
+	GameObject *arvore1Obj = new GameObject();
+	Sprite *arvore1 = new Sprite(*arvore1Obj, "assets/img/cenario1/arvore3.png");
+	arvore1->SetScale(1.8f, 1.5f);
+	arvore1Obj->AddComponent(arvore1);
+	arvore1Obj->box.pos = {200, 457};
+	AddObject(arvore1Obj);
 
+	GameObject *arvore2Obj = new GameObject();
+	Sprite *arvore2 = new Sprite(*arvore2Obj, "assets/img/cenario1/arvore9.png");
+	arvore2->SetScale(2.25f, 1.75f);
+	arvore2Obj->AddComponent(arvore2);
+	arvore2Obj->box.pos = {400, 377};
+	AddObject(arvore2Obj);
+
+	GameObject *grama1Obj = new GameObject();
+	Sprite *grama1 = new Sprite(*grama1Obj, "assets/img/cenario1/arbustro1.png");
+	grama1->SetScale(2.25f, 1.75f);
+	grama1Obj->AddComponent(grama1);
+	grama1Obj->box.pos = {400, 579};
+	AddObject(grama1Obj);
+
+	GameObject *grama2Obj = new GameObject();
+	Sprite *grama2 = new Sprite(*grama2Obj, "assets/img/cenario1/arbustro1.png");
+	grama2Obj->AddComponent(grama2);
+	grama2Obj->box.pos = {600, 589};
+	AddObject(grama2Obj);
+
+	/*2 plataforma*/
+	GameObject *arvore3Obj = new GameObject();
+	Sprite *arvore3 = new Sprite(*arvore3Obj, "assets/img/cenario1/arvore10.png");
+	arvore3->SetScale(1.7f, 1.25f);
+	arvore3Obj->AddComponent(arvore3);
+	arvore3Obj->box.pos = {1240, 442};
+	AddObject(arvore3Obj);
+
+	GameObject *grama3Obj = new GameObject();
+	Sprite *grama3 = new Sprite(*grama3Obj, "assets/img/cenario1/arbustro1.png");
+	grama3Obj->AddComponent(grama3);
+	grama3Obj->box.pos = {1248, 589};
+	AddObject(grama3Obj);
+	
+	/*4 plataforma*/
+	GameObject *arvore4Obj = new GameObject();
+	Sprite *arvore4 = new Sprite(*arvore4Obj, "assets/img/cenario1/arvore2.png");
+	arvore4Obj->AddComponent(arvore4);
+	arvore4Obj->box.pos = {2650, 508};
+	AddObject(arvore4Obj);
+
+	GameObject *grama5Obj = new GameObject();
+	Sprite *grama5 = new Sprite(*grama5Obj, "assets/img/cenario1/arbustro2.png");
+	grama5Obj->AddComponent(grama5);
+	grama5Obj->box.pos = {2681, 591};
+	AddObject(grama5Obj);
+
+	GameObject *arvore5Obj = new GameObject();
+	Sprite *arvore5 = new Sprite(*arvore5Obj, "assets/img/cenario1/arvore6.png");
+	arvore5->SetScale(1.5f, 1.20f);
+	arvore5Obj->AddComponent(arvore5);
+	arvore5Obj->box.pos = {2950, 385};
+	AddObject(arvore5Obj);
+
+	GameObject *arvore6Obj = new GameObject();
+	Sprite *arvore6 = new Sprite(*arvore6Obj, "assets/img/cenario1/arvore9.png");
+	arvore6->SetScale(1.5f, 1.20f);
+	arvore6Obj->AddComponent(arvore6);
+	arvore6Obj->box.pos = {3150, 383};
+	AddObject(arvore6Obj);
+
+	GameObject *grama6Obj = new GameObject();
+	Sprite *grama6 = new Sprite(*grama6Obj, "assets/img/cenario1/arbustro2.png");
+	grama6Obj->AddComponent(grama6);
+	grama6Obj->box.pos = {3150, 525};
+	AddObject(grama6Obj);
+
+	GameObject *grama7Obj = new GameObject();
+	Sprite *grama7 = new Sprite(*grama7Obj, "assets/img/cenario1/arbustro2.png");
+	grama7Obj->AddComponent(grama7);
+	grama7Obj->box.pos = {3200, 525};
+	AddObject(grama7Obj);
+
+	/*5 plataforma*/
+	GameObject *arvore7Obj = new GameObject();
+	Sprite *arvore7 = new Sprite(*arvore7Obj, "assets/img/cenario1/arvore8.png");
+	arvore7->SetScale(1.5f, 1.20f);
+	arvore7Obj->AddComponent(arvore7);
+	arvore7Obj->box.pos = {4300, 383};
+	AddObject(arvore7Obj);
+	
+	GameObject *arvore8Obj = new GameObject();
+	Sprite *arvore8 = new Sprite(*arvore8Obj, "assets/img/cenario1/arvore4.png");
+	arvore8->SetScale(0.8f, 0.8f);
+	arvore8Obj->AddComponent(arvore8);
+	arvore8Obj->box.pos = {4500, 463};
+	AddObject(arvore8Obj);
+
+	/*6 plataforma*/
+	GameObject *arvore9Obj = new GameObject();
+	Sprite *arvore9 = new Sprite(*arvore9Obj, "assets/img/cenario1/arvore1.png");
+	arvore9->SetScale(0.8f, 0.8f);
+	arvore9Obj->AddComponent(arvore9);
+	arvore9Obj->box.pos = {5550, 463};
+	AddObject(arvore9Obj);
+
+	GameObject *arvore10Obj = new GameObject();
+	Sprite *arvore10 = new Sprite(*arvore10Obj, "assets/img/cenario1/arvore5.png");
+	arvore10->SetScale(0.8f, 0.8f);
+	arvore10Obj->AddComponent(arvore10);
+	arvore10Obj->box.pos = {5650, 463};
+	AddObject(arvore10Obj);
+
+	GameObject *arvore11Obj = new GameObject();
+	Sprite *arvore11 = new Sprite(*arvore11Obj, "assets/img/cenario1/arvore3.png");
+	arvore11->SetScale(0.8f, 0.8f);
+	arvore11Obj->AddComponent(arvore11);
+	arvore11Obj->box.pos = {5600, 463};
+	AddObject(arvore11Obj);
+
+	/*7 plataforma*/
+	GameObject *arvore12Obj = new GameObject();
+	Sprite *arvore12 = new Sprite(*arvore12Obj, "assets/img/cenario1/arvore10.png");
+	arvore12->SetScale(1.5f, 1.20f);
+	arvore12Obj->AddComponent(arvore12);
+	arvore12Obj->box.pos = {6300, 385};
+	AddObject(arvore12Obj);
+
+	GameObject *grama9Obj = new GameObject();
+	Sprite *grama9 = new Sprite(*grama9Obj, "assets/img/cenario1/arbustro3.png");
+	grama9Obj->AddComponent(grama9);
+	grama9Obj->box.pos = {6300, 525};
+	AddObject(grama9Obj);
+
+	GameObject *grama10Obj = new GameObject();
+	Sprite *grama10 = new Sprite(*grama10Obj, "assets/img/cenario1/arbustro2.png");
+	grama10Obj->AddComponent(grama10);
+	grama10Obj->box.pos = {6355, 525};
+	AddObject(grama10Obj);
+
+	GameObject *grama11Obj = new GameObject();
+	Sprite *grama11 = new Sprite(*grama11Obj, "assets/img/cenario1/arbustro1.png");
+	grama11Obj->AddComponent(grama11);
+	grama11Obj->box.pos = {6385, 527};
+	AddObject(grama11Obj);
+
+	/*8 plataforma*/
+	GameObject *arvore13Obj = new GameObject();
+	Sprite *arvore13 = new Sprite(*arvore13Obj, "assets/img/cenario1/arvore3.png");
+	arvore13->SetScale(0.75f, 0.75f);
+	arvore13Obj->AddComponent(arvore13);
+	arvore13Obj->box.pos = {7800, 466};
+	AddObject(arvore13Obj);
+
+	GameObject *arvore14Obj = new GameObject();
+	Sprite *arvore14 = new Sprite(*arvore14Obj, "assets/img/cenario1/arvore10.png");
+	arvore14->SetScale(1.5f, 1.20f);
+	arvore14Obj->AddComponent(arvore14);
+	arvore14Obj->box.pos = {7895, 385};
+	AddObject(arvore14Obj);
+
+	GameObject *grama12Obj = new GameObject();
+	Sprite *grama12 = new Sprite(*grama12Obj, "assets/img/cenario1/arbustro1.png");
+	grama12->SetScale(0.90f, 0.90f);
+	grama12Obj->AddComponent(grama12);
+	grama12Obj->box.pos = {7904, 527};
+	AddObject(grama12Obj);
+
+	GameObject *grama13Obj = new GameObject();
+	Sprite *grama13 = new Sprite(*grama13Obj, "assets/img/cenario1/arbustro1.png");
+	grama13->SetScale(0.90f, 0.90f);
+	grama13Obj->AddComponent(grama13);
+	grama13Obj->box.pos = {7944, 527};
+	AddObject(grama13Obj);
+
+	GameObject *grama14Obj = new GameObject();
+	Sprite *grama14 = new Sprite(*grama14Obj, "assets/img/cenario1/arbustro1.png");
+	grama14Obj->AddComponent(grama14);
+	grama14Obj->box.pos = {7920, 527};
+	AddObject(grama14Obj);
+
+	GameObject *grama15Obj = new GameObject();
+	Sprite *grama15 = new Sprite(*grama15Obj, "assets/img/cenario1/arbustro1.png");
+	grama15->SetScale(0.75f, 0.75f);
+	grama15Obj->AddComponent(grama15);
+	grama15Obj->box.pos = {7813, 528};
+	AddObject(grama15Obj);
+
+	/*9 plataforma*/
+	GameObject *arvore15Obj = new GameObject();
+	Sprite *arvore15 = new Sprite(*arvore15Obj, "assets/img/cenario1/arvore10.png");
+	arvore15->SetScale(1.5f, 1.20f);
+	arvore15Obj->AddComponent(arvore15);
+	arvore15Obj->box.pos = {8895, 162};
+	AddObject(arvore15Obj);
+
+	GameObject *arvore16Obj = new GameObject();
+	Sprite *arvore16 = new Sprite(*arvore16Obj, "assets/img/cenario1/arvore7.png");
+	arvore16->SetScale(1.1f, 1.0f);
+	arvore16Obj->AddComponent(arvore16);
+	arvore16Obj->box.pos = {8990, 188};
+	AddObject(arvore16Obj);
+
+	GameObject *arvore17Obj = new GameObject();
+	Sprite *arvore17 = new Sprite(*arvore17Obj, "assets/img/cenario1/arvore10.png");
+	arvore17->SetScale(1.5f, 1.30f);
+	arvore17Obj->AddComponent(arvore17);
+	arvore17Obj->box.pos = {9040, 150};
+	AddObject(arvore17Obj);
+
+	GameObject *arvore18Obj = new GameObject();
+	Sprite *arvore18 = new Sprite(*arvore18Obj, "assets/img/cenario1/arvore6.png");
+	arvore18Obj->AddComponent(arvore18);
+	arvore18Obj->box.pos = {9200, 187};
+	AddObject(arvore18Obj);
+
+	GameObject *grama17Obj = new GameObject();
+	Sprite *grama17 = new Sprite(*grama17Obj, "assets/img/cenario1/arbustro1.png");
+	grama17Obj->AddComponent(grama17);
+	grama17Obj->box.pos = {9030, 301};
+	AddObject(grama17Obj);
+
+	GameObject *grama16Obj = new GameObject();
+	Sprite *grama16 = new Sprite(*grama16Obj, "assets/img/cenario1/arbustro1.png");
+	grama16Obj->AddComponent(grama16);
+	grama16Obj->box.pos = {9000, 302};
+	AddObject(grama16Obj);
+
+
+	GameObject *grama18Obj = new GameObject();
+	Sprite *grama18 = new Sprite(*grama18Obj, "assets/img/cenario1/arbustro1.png");
+	grama18Obj->AddComponent(grama18);
+	grama18Obj->box.pos = {9062, 304};
+	AddObject(grama18Obj);
 }
 
 void TestState::LoadCenarioFrente() {
+	/*1 plataforma*/
+	GameObject *flor1Obj = new GameObject();
+	Sprite *flor1 = new Sprite(*flor1Obj, "assets/img/cenario1/flor6.png");
+	flor1->SetScale(2.1f, 2.5f);
+	flor1Obj->AddComponent(flor1);
+	flor1Obj->box.pos = {50, 645};
+	AddObject(flor1Obj); //colocar paralax
 
+	GameObject *flor2Obj = new GameObject();
+	Sprite *flor2 = new Sprite(*flor2Obj, "assets/img/cenario1/flor7.png");
+	flor2->SetScale(2.1f, 2.5f);
+	flor2Obj->AddComponent(flor2);
+	flor2Obj->box.pos = {30, 690};
+	AddObject(flor2Obj); //colocar paralax
+
+	GameObject *flor3Obj = new GameObject();
+	Sprite *flor3 = new Sprite(*flor3Obj, "assets/img/cenario1/flor7.png");
+	flor3->SetScale(2.1f, 2.5f);
+	flor3Obj->AddComponent(flor3);
+	flor3Obj->box.pos = {80, 690};
+	AddObject(flor3Obj); //colocar paralax
+
+	GameObject *flor4Obj = new GameObject();
+	Sprite *flor4 = new Sprite(*flor4Obj, "assets/img/cenario1/flor6.png");
+	flor4->SetScale(2.1f, 2.5f);
+	flor4Obj->AddComponent(flor4);
+	flor4Obj->box.pos = {100, 670};
+	AddObject(flor4Obj); //colocar paralax
+
+	/*2 plataforma*/
+	GameObject *flor5Obj = new GameObject();
+	Sprite *flor5 = new Sprite(*flor5Obj, "assets/img/cenario1/flor8.png");
+	//flor5->SetScale(2.1f, 2.5f);
+	flor5Obj->AddComponent(flor5);
+	flor5Obj->box.pos = {930, 595};
+	AddObject(flor5Obj); //colocar paralax
+
+
+	GameObject *grama4Obj = new GameObject();
+	Sprite *grama4 = new Sprite(*grama4Obj, "assets/img/cenario1/arbustro2.png");
+	grama4->SetScale(1.2f, 1.2f);
+	grama4Obj->AddComponent(grama4);
+	grama4Obj->box.pos = {1288, 589};
+	AddObject(grama4Obj);
+
+	GameObject *flor6Obj = new GameObject();
+	Sprite *flor6 = new Sprite(*flor6Obj, "assets/img/cenario1/flor4.png");
+	//flor5->SetScale(2.1f, 2.5f);
+	flor6Obj->AddComponent(flor6);
+	flor6Obj->box.pos = {1350, 605};
+	AddObject(flor6Obj); //colocar paralax
+
+	GameObject *grama8Obj = new GameObject();
+	Sprite *grama8 = new Sprite(*grama8Obj, "assets/img/cenario1/arbustro2.png");
+	grama8Obj->AddComponent(grama8);
+	grama8Obj->box.pos = {3170, 528};
+	AddObject(grama8Obj);
 }
 
 
