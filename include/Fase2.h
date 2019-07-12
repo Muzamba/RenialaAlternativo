@@ -2,6 +2,7 @@
 #define FASE2_H
 
 #include "State.h"
+#include "Music.h"
 
 
 
@@ -18,6 +19,10 @@ public:
     void Start() override;
     void Pause() override;
     void Resume() override;
+private:
+    GameObject* fadeIn;
+    GameObject* fadeOut;
+    Music* musica;
 };
 
 

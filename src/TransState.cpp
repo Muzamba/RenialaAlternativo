@@ -45,7 +45,7 @@ TransState::TransState(int pos) : State() {
         break;
 
     case 3://baixo
-        
+        Game::GetInstance().playerStatus.player->box.mudaCentro({640,700});
         break;
     }
 
@@ -165,7 +165,11 @@ void TransState::LoadAssets() {
     new PlataformaFixa(*plat13,tPlat3.get(),"assets/map/TransState/plat13.txt");
     AddObject(plat13);
 
-
+    static bool first = true;
+    if (first){
+        ((Dialogo*)Game::GetInstance().playerStatus.dialogo->GetComponent("Dialogo"))->Begin("Ha talismas a leste, ao sul e ao oeste!Quando coletar todos retorne a Arvore", "wisp");
+        first = false;
+    }
 
 }
 

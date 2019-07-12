@@ -10,12 +10,12 @@
 Player::Player(GameObject& associated) : Component(associated), atual(nullptr), grounded(false), jumps(0) {
 	associated.AddComponent(this);
 
-	auto sprite = new Sprite(associated, "assets/img/idle.png", 100, 100, 0.08f, 4);
+	auto sprite = new Sprite(associated, "assets/img/idle.png", 100, 100, 0.1f, 4);
 	sprite->SetScale(2, 2);
 	spriteMap["idle"] = sprite;
 	atual = sprite;
 
-	sprite = new Sprite(associated, "assets/img/walk.png", 100, 100, 0.08f, 4);
+	sprite = new Sprite(associated, "assets/img/walk.png", 100, 100, 0.1f, 4);
 	sprite->SetScale(2, 2);
 	spriteMap["walk"] = sprite;
 
@@ -53,6 +53,7 @@ Player::~Player() {
 }
 
 void Player::Update(float dt) {
+	if(!dialogo){
 	static bool one = true;
 	
 	if(pegarItem){
@@ -139,6 +140,11 @@ void Player::Update(float dt) {
 		soundMap["walk"]->Stop();
 		control = false;
 		one = true;
+	}
+	} else {
+		atual = spriteMap["idle"];
+		soundMap["walk"]->Stop();
+		atual->Update(dt);
 	}
 
 }

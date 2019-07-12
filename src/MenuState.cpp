@@ -56,12 +56,19 @@ void MenuState::Start() {
 
 void MenuState::LoadAssets() {
     GameObject* gobg = new GameObject();
-	Sprite* sprite = new Sprite(*gobg, "assets/img/Background.jpg");
-	sprite->SetScale(0.937042f, 0.9375f);
+	Sprite* sprite = new Sprite(*gobg, "assets/img/menu/bg_menuinicial.png");
+	sprite->SetScale(3.742690f,3.75f);//sprite->SetScale(0.937042f, 0.9375f);
     gobg->AddComponent(sprite);
 	gobg->AddComponent(new CameraFollower(*gobg));
 	gobg->box.pos = {0,0};
 	AddObject(gobg);
+
+    GameObject* logo = new GameObject();
+    auto sprite2 = new Sprite(*logo, "assets/img/menu/reniala_logo.png", 0,0,0.1f,9);
+    logo->AddComponent(sprite2);
+    sprite2->SetScale(3.5,3.5);
+    logo->box.mudaCentro({1280 / 2.0f, 720 / 2 - logo->box.size.y/2});
+    AddObject(logo);
 
     goTextbg = new GameObject();
     Sprite *spriteBg = new Sprite(*goTextbg, "assets/img/barra_de_texto.png");

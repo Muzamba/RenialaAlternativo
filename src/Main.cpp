@@ -6,7 +6,7 @@
 
 int main() {
     auto& game = Game::GetInstance();
-    game.Push(new ArvoreState());
+    game.Push(new MenuState());
 
     game.Run();
 

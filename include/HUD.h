@@ -10,12 +10,15 @@
 class HUD : public Component {
 public:
     HUD(GameObject& associated);
+    virtual ~HUD();
+
     void Update(float dt);
     void Render();
     bool Is(std::string type);
     void AddTalisma(GameObject* talisma);
 private:
     std::vector<std::shared_ptr<GameObject>> talismas;
+    GameObject* hud;
 };
 
 #endif //HUD_H
