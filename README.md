@@ -5,8 +5,6 @@ O jogo conta a história de uma árvore que rege o equilíbrio do mundo. No enta
 ## Gênero
 Plataforma 2D PixelArt
 
-## Objectivo
-objetivo, controles, hacks
 ### Objetivo
 Coletar os três talismas que estão espalhados por três cenários(cada talisma está em uma fase diferente) para restaurar a árvore. Quando é coletado os três talismas e o player vai para a fase final, o jogador ganha o jogo.
 ### Controles
@@ -28,6 +26,11 @@ Menu Inicial, Cutscene, Plataformas, Talisma, Montagem primeira fase, CreditStat
 Câmera do Jogo, PauseState, Gravidade, Player, Physic, Adaptação para rodar no Windows
 
 ## Dependencias
+- SDL2
+- SDL2-image
+- SDL2-mixer
+- SDL2-ttf
+
 ### Compilar
 make
 ### Rodar
