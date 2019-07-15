@@ -12,7 +12,7 @@ Para andar com o personagem: WASD e apertar duas vezes o W para o double jump
 Para andar com o wisp(brilho que acompanha personagem): setas do teclado
 Para pular a caixa de diálogo: espaço
 Para começar o jogo: espaço
-Na fase final(árvore), quando tiver coletado os 3 talismas, apertar X para rodar a cutscene final e ganhar o jogo.
+Na fase final(árvore), X para coletar os talismãs e, quando tiver coletado os 3 talismãs, apertar X para rodar a cutscene final e ganhar o jogo.
 ### Hacks
 Na segunda fase, quando aperta H, vai para o final da fase.
 
