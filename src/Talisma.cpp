@@ -26,7 +26,7 @@ Talisma::Talisma(GameObject& associated, std::string textfile, std::string imgfi
 
     atual = spriTable["NotAnimated"];
     texto = new GameObject();
-    texto->AddComponent(new Text(*texto, "assets/font/PixelFont.otf", 15, Text::BLENDED, "precione (x) para coletar", {0,0,0,255}));
+    texto->AddComponent(new Text(*texto, "assets/font/PixelFont.otf", 15, Text::BLENDED, "precione (x) para coletar", {255,255,255,255}));
     texto->box.pos = {associated.box.pos.x,associated.box.pos.y};
     ReadText(textfile); 
     associated.box.size.x = atual->GetWidth();

@@ -16,6 +16,7 @@ public:
     void Render();
     bool Is(std::string type);
     void AddTalisma(GameObject* talisma);
+    int faltaQuantos();
 private:
     std::vector<std::shared_ptr<GameObject>> talismas;
     GameObject* hud;

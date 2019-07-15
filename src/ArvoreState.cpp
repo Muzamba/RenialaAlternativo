@@ -19,6 +19,7 @@
 #include "Dialogo.h"
 #include "TransState.h"
 #include "Gravidade.h"
+#include "PauseState.h"
 
 
 
@@ -100,8 +101,8 @@ void ArvoreState::LoadAssets() {
 
         GameObject* talismaPedra = new GameObject();
 		Talisma *talisma3 = new Talisma(*talismaPedra, "assets/text/talisma3.txt", "assets/img/talismans/talisma_pedra(1).png","assets/img/talismans/talisma_pedra.png","assets/img/talismans/pedra.png", Camera::FEIA, 2);
-		talismaPedra->box.pos.x = 0;//definir posicao do talisma na fase correspondente
-		talismaPedra->box.pos.y = 0 ;//
+		talismaPedra->box.pos.x = 1280 + 32;//definir posicao do talisma na fase correspondente
+		talismaPedra->box.pos.y = 550 ;//
 		((HUD*)Game::GetInstance().playerStatus.hud->GetComponent("HUD"))->AddTalisma(talismaPedra);
 
 
@@ -212,8 +213,12 @@ void ArvoreState::Update(float dt) {
     }
     
 
-	if (InputManager::GetInstance().KeyPress(ESCAPE_KEY) || InputManager::GetInstance().QuitRequested()) {
+	if (InputManager::GetInstance().QuitRequested()) {
 		quitRequested = true;
+	}
+
+	if(InputManager::GetInstance().KeyPress(ESCAPE_KEY) ){
+		Game::GetInstance().Push(new PauseState());
 	}
     
         fadeIn->Update(dt);

@@ -5,6 +5,7 @@
 #include "Sprite.h"
 #include "InputManager.h"
 #include "Camera.h"
+#include "PauseState.h"
 #include "PlataformaFixa.h"
 #include "Physic.h"
 #include "PlataformaMovel.h"
@@ -148,9 +149,9 @@ void TestState::LoadBg() {
 }
 
 void TestState::LoadPlataformas() {
-	auto chao2 = Resources::GetTileSet("assets/img/chao2.png");
-	auto plat_hor_2 = Resources::GetTileSet("assets/img/plat_hor_2.png");
-	auto plat_ver_2 = Resources::GetTileSet("assets/img/plat_ver_2.png");
+	static auto chao2 = Resources::GetTileSet("assets/img/chao2.png");
+	static auto plat_hor_2 = Resources::GetTileSet("assets/img/plat_hor_2.png");
+	static auto plat_ver_2 = Resources::GetTileSet("assets/img/plat_ver_2.png");
 
 
 	GameObject *plat1Obj = new GameObject();
@@ -343,7 +344,10 @@ void TestState::Update(float dt) {
 	if(Game::GetInstance().playerStatus.player->box.pos.y > 720) {
 		Game::GetInstance().playerStatus.player->box.pos = {300,300};
 	}
-	if (InputManager::GetInstance().KeyPress(ESCAPE_KEY) || InputManager::GetInstance().QuitRequested()) {
+	if(InputManager::GetInstance().KeyPress(ESCAPE_KEY) ){
+		Game::GetInstance().Push(new PauseState());
+	}
+	if (InputManager::GetInstance().QuitRequested()) {
 		quitRequested = true;
 	}
 	//for(unsigned int i = 0;i < objectArray.size();++i) {
@@ -394,10 +398,11 @@ void TestState::Render() {
 	playerStatus.player->Render();
 	playerStatus.wisp->Render();
 	playerStatus.hud->Render();
-	playerStatus.dialogo->Render();
 	for(auto& obj : frontArray){
 		obj->Render();
 	}
+
+	playerStatus.dialogo->Render();
 	fadeIn->Render();
 	fadeOut->Render();
 }
@@ -635,14 +640,18 @@ void TestState::LoadCenarioFrente() {
 	flor1_2->SetScale(4.0f, 4.0f);
 	flor1_2Obj->AddComponent(flor1_2);
 	flor1_2Obj->box.pos = {0, 640};
-	AddObject(flor1_2Obj); //colocar paralax
+
+	frontArray.emplace_back(flor1_2Obj); //colocar paralax
+
 
 	GameObject *flor1Obj = new GameObject();
 	Sprite *flor1 = new Sprite(*flor1Obj, "assets/img/cenario1/flor6.png");
 	flor1->SetScale(4.0f, 4.0f);
 	flor1Obj->AddComponent(flor1);
 	flor1Obj->box.pos = {100, 610};
-	AddObject(flor1Obj); //colocar paralax
+
+	frontArray.emplace_back(flor1Obj); //colocar paralax
+
 	//flor1Obj->box.pos = {50, 645};
 	//frontArray.emplace_back(flor1Obj); //colocar paralax
 
@@ -651,7 +660,9 @@ void TestState::LoadCenarioFrente() {
 	flor2->SetScale(4.0f, 4.0f);
 	flor2Obj->AddComponent(flor2);
 	flor2Obj->box.pos = {200, 640};
-	AddObject(flor2Obj); //colocar paralax
+
+	frontArray.emplace_back(flor2Obj); //colocar paralax
+
 
 	/*
 	flor2Obj->box.pos = {30, 690};
@@ -669,7 +680,9 @@ void TestState::LoadCenarioFrente() {
 	flor4->SetScale(4.0f, 4.0f);
 	flor4Obj->AddComponent(flor4);
 	flor4Obj->box.pos = {240, 610};
-	AddObject(flor4Obj); //colocar paralax
+
+	frontArray.emplace_back(flor4Obj); //colocar paralax
+
 	//flor4Obj->box.pos = {100, 670};
 	//frontArray.emplace_back(flor4Obj); //colocar paralax
 
@@ -678,8 +691,9 @@ void TestState::LoadCenarioFrente() {
 	flor3->SetScale(4.0f, 4.0f);
 	flor3Obj->AddComponent(flor3);
 	flor3Obj->box.pos = {260, 665};
-	AddObject(flor3Obj); //colocar paralax
-*/
+
+	frontArray.emplace_back(flor3Obj); //colocar paralax
+
 
 	/*2 plataforma*/
 	/*GameObject *flor5Obj = new GameObject();
@@ -687,14 +701,18 @@ void TestState::LoadCenarioFrente() {
 	flor5->SetScale(2.1f, 2.5f);
 	flor5Obj->AddComponent(flor5);
 	flor5Obj->box.pos = {930, 665};
-	AddObject(flor5Obj); //colocar paralax
+
+	frontArray.emplace_back(flor5Obj); //colocar paralax
+
 	*/
 	GameObject *flor5_2Obj = new GameObject();
 	Sprite *flor5_2 = new Sprite(*flor5_2Obj, "assets/img/cenario1/flor8.png");
 	flor5_2->SetScale(4.0f, 4.0f);
 	flor5_2Obj->AddComponent(flor5_2);
 	flor5_2Obj->box.pos = {930, 635};
-	AddObject(flor5_2Obj); //colocar paralax
+
+	frontArray.emplace_back(flor5_2Obj); //colocar paralax
+
 	//flor5Obj->box.pos = {930, 595};
 	//frontArray.emplace_back(flor5Obj); //colocar paralax
 
@@ -704,7 +722,9 @@ void TestState::LoadCenarioFrente() {
 	grama4->SetScale(4.0f, 4.0f);
 	grama4Obj->AddComponent(grama4);
 	grama4Obj->box.pos = {1688, 558};
-	AddObject(grama4Obj);
+
+	frontArray.emplace_back(grama4Obj);
+
 	//grama4Obj->box.pos = {1288, 589};
 	//frontArray.emplace_back(grama4Obj);
 
@@ -720,7 +740,9 @@ void TestState::LoadCenarioFrente() {
 	grama8->SetScale(4.0f, 4.0f);
 	grama8Obj->AddComponent(grama8);
 	grama8Obj->box.pos = {3170, 500};
-	AddObject(grama8Obj);
+
+	frontArray.emplace_back(grama8Obj);
+
 	//grama8Obj->box.pos = {3170, 528};
 	//frontArray.emplace_back(grama8Obj);
 }

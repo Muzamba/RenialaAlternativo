@@ -4,6 +4,9 @@
 #include "Player.h"
 #include "Dialogo.h"
 #include "Wisp.h"
+#include "InputManager.h"
+#include "HUD.h"
+#include "Cutscene.h"
 
 ArvoreComponent::ArvoreComponent(GameObject& associated) : Component(associated) {
     associated.AddComponent(this);
@@ -46,6 +49,17 @@ void ArvoreComponent::Update(float dt) {
         ligaRender = false;
         atual = idle;
         atual->Update(dt);
+        if(associated.box.estaDentro(Game::GetInstance().playerStatus.player->box.centro().x, Game::GetInstance().playerStatus.player->box.centro().y)) {
+            if(InputManager::GetInstance().KeyPress(SDLK_x)){
+                int a = ((HUD*)Game::GetInstance().playerStatus.hud->GetComponent("HUD"))->faltaQuantos();
+                if(a != 3){
+                    ((Dialogo*)Game::GetInstance().playerStatus.dialogo->GetComponent("Dialogo"))->Begin("Preciso de mais !!!!!", "arvore");
+                } else {
+                    Game::GetInstance().Push(new Cutscene(false));
+                }
+            }
+        }
+
     }
         static bool second = true;
     if(ligaRender){
