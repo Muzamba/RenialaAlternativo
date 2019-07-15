@@ -15,7 +15,7 @@ Para andar com o wisp(brilho que acompanha personagem): setas do teclado
 Para pular a caixa de diálogo: espaço
 Para começar o jogo: espaço
 ### Hacks
-
+Na segunda fase, quando aperta h, vai para o final da fase.
 
 ## Membros
 Obs.: Algumas dessas funcionalidades foram feitas em conjunto entre os três membros
