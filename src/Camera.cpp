@@ -44,6 +44,10 @@ void Camera::Update(float dt) {
                 break;
 
             case FEIA:
+                xMax = 640;
+                xMin = 0;
+                yMax = 0;
+                yMin = 0;
                 break;
 
             case CAVERNA:

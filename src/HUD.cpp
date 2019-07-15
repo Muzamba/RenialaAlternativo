@@ -71,5 +71,17 @@ void HUD::AddTalisma(GameObject* talisma) {
     talismas.emplace_back(talisma);
 }
 
+int HUD::faltaQuantos() {
+    int contador = 0;
+    for(auto& obj : talismas){
+        if(((Talisma*)obj->GetComponent("Talisma"))->coletado) {
+            contador++;
+        }
+
+
+    }
+    return contador;
+}
+
 
 

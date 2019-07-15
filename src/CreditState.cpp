@@ -66,14 +66,14 @@ void CreditState::LoadAssets() {
 
     /*Musicos*/
     GameObject *musicoGo = new GameObject();
-    Text * musicoText = new Text(*musicoGo,"assets/font/herculanum.ttf", 25, Text::BLENDED, "Musicos", {255,255,255,255});
+    Text * musicoText = new Text(*musicoGo,"assets/font/PixelFont.otf", 25, Text::BLENDED, "Musicos", {255,255,255,255});
     musicoGo->AddComponent(musicoText);
     musicoGo->box.pos = {600, 500};
     AddObject(musicoGo); 
 
     GameObject *mObj = new GameObject();
-    Text * mText = new Text(*mObj,"assets/font/herculanum.ttf", 20, Text::BLENDED, "Heliel Sena    Pedro Ribeiro", {255,255,255,255});
+    Text * mText = new Text(*mObj,"assets/font/PixelFont.otf", 20, Text::BLENDED, "Heliel Sena    Pedro Ribeiro    Daniel", {255,255,255,255});
     mObj->AddComponent(mText);
-    mObj->box.pos = {510, 600};
+    mObj->box.pos = {510-5, 600};
     AddObject(mObj);
 }

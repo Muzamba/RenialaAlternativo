@@ -63,7 +63,7 @@ void Dialogo::Update(float dt) {
             timer.Update(dt);
         } else {
             timerButton.Update(dt);
-
+            ((Sprite*)box->GetComponent("Sprite"))->SetFrame(7);
             if(piscaButton) {
                 if(timerButton.Get() > 1.5f) {
                     timerButton.Restart();

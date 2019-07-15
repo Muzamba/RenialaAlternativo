@@ -115,6 +115,7 @@ void Cutscene::Start() {
 }
 
 void Cutscene::LoadAssets() {
+    Game::GetInstance().playerStatus.criarVariaveis = true;
     if(inicial) {
         cena1obj = new GameObject();
         Sprite *scene1 = new Sprite(*cena1obj, "assets/img/cutscene_inicial/cena_1.png");

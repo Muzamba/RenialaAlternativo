@@ -21,6 +21,7 @@
 #include "Resources.h"
 #include "TestState.h"
 #include "Fase2.h"
+#include "Fase3.h"
 
 TransState::TransState(int pos) : State() {
     Camera::SetFase(Camera::TRANSICAO); 
@@ -41,7 +42,7 @@ TransState::TransState(int pos) : State() {
         break;
 
     case 2://direita
-        
+        Game::GetInstance().playerStatus.player->box.mudaCentro({1280,600});
         break;
 
     case 3://baixo
@@ -198,6 +199,9 @@ void TransState::Update(float dt) {
         }else if(Game::GetInstance().playerStatus.player->box.centro().y > 720) {
             mudaState = true;
             destino = new Fase2();
+        } else if(Game::GetInstance().playerStatus.player->box.centro().x > 1280) {
+            mudaState = true;
+            destino = new Fase3();
         }
     } else{
         static bool first = true;
@@ -209,6 +213,7 @@ void TransState::Update(float dt) {
             popRequested = true;
             Game::GetInstance().Push(destino);
             first = true;
+            return;
         }
     }
 
