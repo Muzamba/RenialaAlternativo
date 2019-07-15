@@ -171,7 +171,7 @@ void TestState::LoadPlataformas() {
 
 	GameObject *plat4Obj = new GameObject();
 	PlataformaFixa *plat4 = new PlataformaFixa(*plat4Obj, plat_hor_2.get(), "assets/map/plat3.txt");
-	plat4Obj->box.pos = {2300 - 50, 530 };
+	plat4Obj->box.pos = {2325 - 50, 530 };
 	AddObject(plat4Obj);
 
 	GameObject *plat5Obj = new GameObject();
@@ -220,7 +220,7 @@ void TestState::LoadPlataformas() {
 	AddObject(plat13Obj);
 
 	GameObject *plat14Obj = new GameObject();
-	plat14Obj->box.pos = {6800 - 50, 480 };
+	plat14Obj->box.pos = {6700 - 50, 480 };
 	PlataformaMovel *plat14 = new PlataformaMovel(*plat14Obj, plat_hor_2.get(), "assets/map/plat3.txt", PlataformaMovel::HORIZONTAL, 100.0f, 0.2f);
 	AddObject(plat14Obj);
 
@@ -640,14 +640,18 @@ void TestState::LoadCenarioFrente() {
 	flor1_2->SetScale(4.0f, 4.0f);
 	flor1_2Obj->AddComponent(flor1_2);
 	flor1_2Obj->box.pos = {0, 640};
+
 	frontArray.emplace_back(flor1_2Obj); //colocar paralax
+
 
 	GameObject *flor1Obj = new GameObject();
 	Sprite *flor1 = new Sprite(*flor1Obj, "assets/img/cenario1/flor6.png");
 	flor1->SetScale(4.0f, 4.0f);
 	flor1Obj->AddComponent(flor1);
 	flor1Obj->box.pos = {100, 610};
+
 	frontArray.emplace_back(flor1Obj); //colocar paralax
+
 	//flor1Obj->box.pos = {50, 645};
 	//frontArray.emplace_back(flor1Obj); //colocar paralax
 
@@ -656,7 +660,9 @@ void TestState::LoadCenarioFrente() {
 	flor2->SetScale(4.0f, 4.0f);
 	flor2Obj->AddComponent(flor2);
 	flor2Obj->box.pos = {200, 640};
+
 	frontArray.emplace_back(flor2Obj); //colocar paralax
+
 
 	/*
 	flor2Obj->box.pos = {30, 690};
@@ -674,7 +680,9 @@ void TestState::LoadCenarioFrente() {
 	flor4->SetScale(4.0f, 4.0f);
 	flor4Obj->AddComponent(flor4);
 	flor4Obj->box.pos = {240, 610};
+
 	frontArray.emplace_back(flor4Obj); //colocar paralax
+
 	//flor4Obj->box.pos = {100, 670};
 	//frontArray.emplace_back(flor4Obj); //colocar paralax
 
@@ -683,8 +691,9 @@ void TestState::LoadCenarioFrente() {
 	flor3->SetScale(4.0f, 4.0f);
 	flor3Obj->AddComponent(flor3);
 	flor3Obj->box.pos = {260, 665};
+
 	frontArray.emplace_back(flor3Obj); //colocar paralax
-*/
+
 
 	/*2 plataforma*/
 	/*GameObject *flor5Obj = new GameObject();
@@ -692,14 +701,18 @@ void TestState::LoadCenarioFrente() {
 	flor5->SetScale(2.1f, 2.5f);
 	flor5Obj->AddComponent(flor5);
 	flor5Obj->box.pos = {930, 665};
+
 	frontArray.emplace_back(flor5Obj); //colocar paralax
+
 	*/
 	GameObject *flor5_2Obj = new GameObject();
 	Sprite *flor5_2 = new Sprite(*flor5_2Obj, "assets/img/cenario1/flor8.png");
 	flor5_2->SetScale(4.0f, 4.0f);
 	flor5_2Obj->AddComponent(flor5_2);
 	flor5_2Obj->box.pos = {930, 635};
+
 	frontArray.emplace_back(flor5_2Obj); //colocar paralax
+
 	//flor5Obj->box.pos = {930, 595};
 	//frontArray.emplace_back(flor5Obj); //colocar paralax
 
@@ -709,7 +722,9 @@ void TestState::LoadCenarioFrente() {
 	grama4->SetScale(4.0f, 4.0f);
 	grama4Obj->AddComponent(grama4);
 	grama4Obj->box.pos = {1688, 558};
+
 	frontArray.emplace_back(grama4Obj);
+
 	//grama4Obj->box.pos = {1288, 589};
 	//frontArray.emplace_back(grama4Obj);
 
@@ -725,7 +740,9 @@ void TestState::LoadCenarioFrente() {
 	grama8->SetScale(4.0f, 4.0f);
 	grama8Obj->AddComponent(grama8);
 	grama8Obj->box.pos = {3170, 500};
+
 	frontArray.emplace_back(grama8Obj);
+
 	//grama8Obj->box.pos = {3170, 528};
 	//frontArray.emplace_back(grama8Obj);
 }
