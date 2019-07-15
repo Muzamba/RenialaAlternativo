@@ -8,12 +8,13 @@ Plataforma 2D PixelArt
 ## Objectivo
 objetivo, controles, hacks
 ### Objetivo
-Coletar os três talismas que estão espalhados por três cenários(cada talisma está em uma fase diferente) para restaurar a árvore.
+Coletar os três talismas que estão espalhados por três cenários(cada talisma está em uma fase diferente) para restaurar a árvore. Quando é coletado os três talismas e o player vai para a fase final, o jogador ganha o jogo.
 ### Controles
 Para andar com o personagem: WASD e apertar duas vezes o W para o double jump 
 Para andar com o wisp(brilho que acompanha personagem): setas do teclado
 Para pular a caixa de diálogo: espaço
 Para começar o jogo: espaço
+Na fase final(arvore), quando tiver coletado os 3 talismas, apertar x para rodar a cutscene final e ganhar o jogo.
 ### Hacks
 Na segunda fase, quando aperta h, vai para o final da fase.
 
@@ -24,11 +25,18 @@ Talisma, Diálogo, Wisp, TransState, Fade In, Fade Out, Montagem fase 2 e 3, HUD
 ### Cristiane Naves
 Menu Inicial, Cutscene, Plataformas, Talisma, Montagem primeira fase, CreditState
 ### Divino Junior
-Câmera do Jogo, PauseState, Gravidade, Player, Physic
+Câmera do Jogo, PauseState, Gravidade, Player, Physic, Adaptação para rodar no Windows
 
 ## Dependencias
 ### Compilar
 make
 ### Rodar
 make run
+
+## Github
+https://github.com/Muzamba/RenialaAlternativo
+
+### Github2
+O seguinte github foi utilizado antes de fazer uma migração para o RenialaAlternativo:
+https://github.com/juniobatista12/Trabalho_IDJ
 
