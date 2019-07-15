@@ -26,7 +26,9 @@ Menu Inicial, Cutscene, Plataformas, Talisma, Montagem primeira fase, CreditStat
 ### Divino Junior
 Câmera do Jogo, PauseState, Gravidade, Player, Physic
 
-## dependencias
-make -> compilar
-make run -> rodar
+## Dependencias
+### Compilar
+make
+### Rodar
+make run
 
